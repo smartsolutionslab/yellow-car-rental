@@ -1,18 +1,17 @@
-using SmartSolutionsLab.YellowCarRental.Frontend.Public.Components;
+using MudBlazor.Services;
 using SmartSolutionsLab.YellowCarRental.Frontend.Public.Client.Pages;
+using SmartSolutionsLab.YellowCarRental.Frontend.Public.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.AddServiceDefaults();
+// Add MudBlazor services
+builder.Services.AddMudServices();
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
-    .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
 
 var app = builder.Build();
-
-app.MapDefaultEndpoints();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -33,7 +32,6 @@ app.UseAntiforgery();
 
 app.MapStaticAssets();
 app.MapRazorComponents<App>()
-    .AddInteractiveServerRenderMode()
     .AddInteractiveWebAssemblyRenderMode()
     .AddAdditionalAssemblies(typeof(SmartSolutionsLab.YellowCarRental.Frontend.Public.Client._Imports).Assembly);
 

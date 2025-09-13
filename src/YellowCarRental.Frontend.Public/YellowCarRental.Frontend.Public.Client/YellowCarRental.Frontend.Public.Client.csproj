@@ -6,11 +6,15 @@
         <Nullable>enable</Nullable>
         <NoDefaultLaunchSettingsFile>true</NoDefaultLaunchSettingsFile>
         <StaticWebAssetProjectMode>Default</StaticWebAssetProjectMode>
-        <AssemblyName>Frontend.Public.Client</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly"/>
+        <PackageReference Include="MudBlazor"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\YellowCarRental.Frontend.Shared.Components\YellowCarRental.Frontend.Shared.Components.csproj" />
     </ItemGroup>
 
 </Project>

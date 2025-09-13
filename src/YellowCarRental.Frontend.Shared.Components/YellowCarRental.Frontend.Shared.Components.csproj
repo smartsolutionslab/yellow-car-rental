@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <!-- Rely on package references only to be compatible with WASM consumers -->
+        <PackageReference Include="MudBlazor" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" PrivateAssets="all" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <!-- Exclude MVC Razor Pages from this RCL to avoid requiring MVC support -->
+        <RazorGenerate Remove="Areas\**\*.cshtml" />
+        <Compile Remove="Areas\**\*.cshtml.cs" />
+        <Content Remove="Areas\**" />
+        <None Remove="Areas\**" />
+    </ItemGroup>
+
+</Project>

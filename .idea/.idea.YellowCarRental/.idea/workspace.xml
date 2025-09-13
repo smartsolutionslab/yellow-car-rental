@@ -15,20 +15,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d7d35477-cc4c-4f20-a938-b67bba0197b5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/YellowCarRental.Domain/Booking.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/YellowCarRental.Domain/DateRange.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/YellowCarRental.Domain/IEntity.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/YellowCarRental.Domain/IRootEntity.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/YellowCarRental.Domain/IValueObject.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/YellowCarRental.sln" beforeDir="false" afterPath="$PROJECT_DIR$/YellowCarRental.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter/Components/Account/Pages/ConfirmEmailChange.razor" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter/Components/Account/Pages/ConfirmEmailChange.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter/Components/Account/Pages/Login.razor" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter/Components/Account/Pages/Login.razor" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter.Client/Layout/ClientNavMenu.razor" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/YellowCarRental.Frontend.Public/YellowCarRental.Frontend.Public.Client/Layout/ClientNavMenu.razor" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/YellowCarRental.Frontend.Shared.Components/Layout/MainLayout.razor" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/YellowCarRental.Frontend.Shared.Components/Layout/NavMenu.razor" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/YellowCarRental.Frontend.Shared.Components/_Imports.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.YellowCarRental/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.YellowCarRental/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Directory.Packages.props" beforeDir="false" afterPath="$PROJECT_DIR$/Directory.Packages.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter.Client/Layout/MainLayout.razor" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter.Client/Layout/NavMenu.razor" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter.Client/Routes.razor" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter.Client/Routes.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter.Client/YellowCarRental.Frontend.CallCenter.Client.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter.Client/YellowCarRental.Frontend.CallCenter.Client.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter.Client/_Imports.razor" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter.Client/_Imports.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Frontend.Public/YellowCarRental.Frontend.Public.Client/Layout/MainLayout.razor" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Frontend.Public/YellowCarRental.Frontend.Public.Client/Layout/NavMenu.razor" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Frontend.Public/YellowCarRental.Frontend.Public.Client/Routes.razor" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Frontend.Public/YellowCarRental.Frontend.Public.Client/Routes.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Frontend.Public/YellowCarRental.Frontend.Public.Client/YellowCarRental.Frontend.Public.Client.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Frontend.Public/YellowCarRental.Frontend.Public.Client/YellowCarRental.Frontend.Public.Client.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Frontend.Public/YellowCarRental.Frontend.Public.Client/_Imports.razor" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Frontend.Public/YellowCarRental.Frontend.Public.Client/_Imports.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Frontend.Shared.Components/Areas/MyFeature/Pages/Page1.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Frontend.Shared.Components/Areas/MyFeature/Pages/Page1.cshtml.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Frontend.Shared.Components/YellowCarRental.Frontend.Shared.Components.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Frontend.Shared.Components/YellowCarRental.Frontend.Shared.Components.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DpaMonitoringSettings">
+    <option name="firstShow" value="false" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -46,9 +60,22 @@
   }
 }]]></component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/ec67fc61dea1a1940dea6387ca41928b7520b01e14778b5a6e251757bd894/CascadingValue.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/YellowCarRental.Domain/DateRange.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js.map" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter.Client/Layout/ClientNavMenu.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="mock://D:/yellow-car-rental/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter.Client/Routes.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="mock://D:/yellow-car-rental/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter.Client/Routes.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="mock://D:/yellow-car-rental/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter.Client/Routes.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="mock://D:/yellow-car-rental/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter.Client/_Imports.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/YellowCarRental.Frontend.Public/YellowCarRental.Frontend.Public.Client/Layout/ClientNavMenu.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="mock://D:/yellow-car-rental/src/YellowCarRental.Frontend.Public/YellowCarRental.Frontend.Public.Client/Routes.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="mock://D:/yellow-car-rental/src/YellowCarRental.Frontend.Public/YellowCarRental.Frontend.Public.Client/Routes.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="mock://D:/yellow-car-rental/src/YellowCarRental.Frontend.Public/YellowCarRental.Frontend.Public.Client/_Imports.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="mock://D:/yellow-car-rental/src/YellowCarRental.Frontend.Public/YellowCarRental.Frontend.Public.Client/_Imports.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="mock://D:/yellow-car-rental/src/YellowCarRental.Frontend.Public/YellowCarRental.Frontend.Public/Components/_Imports.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/YellowCarRental.Frontend.Shared.Components/Layout/MainLayout.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/YellowCarRental.Frontend.Shared.Components/Layout/NavMenu.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/YellowCarRental.Frontend.Shared.Components/_Imports.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
   </component>
   <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
   <component name="KubernetesApiProvider"><![CDATA[{
@@ -66,6 +93,9 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    ".NET Project.YellowCarRental.Frontend.Public.Client.executor": "Run",
+    "Aspire Host.AppHost: http.executor": "Run",
+    "Aspire Host.AppHost: https.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
@@ -131,9 +161,9 @@
       </method>
     </configuration>
     <configuration name="YellowCarRental.Frontend.CallCenter.Client" type="DotNetProject" factoryName=".NET Project">
-      <option name="EXE_PATH" value="" />
-      <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
+      <option name="EXE_PATH" value="$USER_HOME$/.nuget/packages/microsoft.net.sdk.webassembly.pack/9.0.9/WasmAppHost/WasmAppHost.dll" />
+      <option name="PROGRAM_PARAMETERS" value="--use-staticwebassets --runtime-config D:\yellow-car-rental\src\YellowCarRental.Frontend.CallCenter\YellowCarRental.Frontend.CallCenter.Client\bin\Debug\net9.0\YellowCarRental.Frontend.CallCenter.Client.runtimeconfig.json" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter.Client/bin/Debug/net9.0" />
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="ENV_FILE_PATHS" value="" />
@@ -148,30 +178,7 @@
       <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
       <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
       <option name="PROJECT_KIND" value="DotNetCore" />
-      <option name="PROJECT_TFM" value="" />
-      <method v="2">
-        <option name="Build" />
-      </method>
-    </configuration>
-    <configuration name="YellowCarRental.Frontend.Public.Client" type="DotNetProject" factoryName=".NET Project">
-      <option name="EXE_PATH" value="" />
-      <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="PASS_PARENT_ENVS" value="1" />
-      <option name="USE_EXTERNAL_CONSOLE" value="0" />
-      <option name="ENV_FILE_PATHS" value="" />
-      <option name="REDIRECT_INPUT_PATH" value="" />
-      <option name="PTY_MODE" value="Auto" />
-      <option name="MIXED_MODE_DEBUG" value="0" />
-      <option name="USE_MONO" value="0" />
-      <option name="RUNTIME_ARGUMENTS" value="" />
-      <option name="AUTO_ATTACH_CHILDREN" value="0" />
-      <option name="PROJECT_PATH" value="$PROJECT_DIR$/src/YellowCarRental.Frontend.Public/YellowCarRental.Frontend.Public.Client/YellowCarRental.Frontend.Public.Client.csproj" />
-      <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
-      <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
-      <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
-      <option name="PROJECT_KIND" value="DotNetCore" />
-      <option name="PROJECT_TFM" value="" />
+      <option name="PROJECT_TFM" value="net9.0" />
       <method v="2">
         <option name="Build" />
       </method>
@@ -183,6 +190,7 @@
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="USE_MONO" value="0" />
       <option name="RUNTIME_ARGUMENTS" value="" />
+      <browser name="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
       <option name="GENERATE_APPLICATIONHOST_CONFIG" value="1" />
       <option name="SHOW_IIS_EXPRESS_OUTPUT" value="0" />
       <option name="SEND_DEBUG_REQUEST" value="1" />
@@ -199,6 +207,7 @@
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="USE_MONO" value="0" />
       <option name="RUNTIME_ARGUMENTS" value="" />
+      <browser name="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
       <option name="GENERATE_APPLICATIONHOST_CONFIG" value="1" />
       <option name="SHOW_IIS_EXPRESS_OUTPUT" value="0" />
       <option name="SEND_DEBUG_REQUEST" value="1" />
@@ -215,6 +224,7 @@
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="USE_MONO" value="0" />
       <option name="RUNTIME_ARGUMENTS" value="" />
+      <browser name="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
       <option name="GENERATE_APPLICATIONHOST_CONFIG" value="1" />
       <option name="SHOW_IIS_EXPRESS_OUTPUT" value="0" />
       <option name="SEND_DEBUG_REQUEST" value="1" />
@@ -231,6 +241,7 @@
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="USE_MONO" value="0" />
       <option name="RUNTIME_ARGUMENTS" value="" />
+      <browser name="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
       <option name="GENERATE_APPLICATIONHOST_CONFIG" value="1" />
       <option name="SHOW_IIS_EXPRESS_OUTPUT" value="0" />
       <option name="SEND_DEBUG_REQUEST" value="1" />
@@ -240,6 +251,15 @@
         <option name="Build" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue=".NET Launch Settings Profile.YellowCarRental.Frontend.CallCenter: http" />
+      <item itemvalue=".NET Launch Settings Profile.YellowCarRental.Frontend.CallCenter: https" />
+      <item itemvalue=".NET Launch Settings Profile.YellowCarRental.Frontend.Public: http" />
+      <item itemvalue=".NET Launch Settings Profile.YellowCarRental.Frontend.Public: https" />
+      <item itemvalue=".NET Project.YellowCarRental.Frontend.CallCenter.Client" />
+      <item itemvalue="Aspire Host.AppHost: http" />
+      <item itemvalue="Aspire Host.AppHost: https" />
+    </list>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -248,7 +268,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1758052150390</updated>
-      <workItem from="1758052152251" duration="7284000" />
+      <workItem from="1758052152251" duration="17079000" />
     </task>
     <task id="LOCAL-00001" summary="inital solution with aspire apphost and centralized package versioning">
       <option name="closed" value="true" />
@@ -274,7 +294,23 @@
       <option name="project" value="LOCAL" />
       <updated>1758057817126</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="starting with domain model">
+      <option name="closed" value="true" />
+      <created>1758075675369</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1758075675369</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Frontends with MudBlazor now">
+      <option name="closed" value="true" />
+      <created>1758078003060</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1758078003060</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -287,7 +323,9 @@
     <MESSAGE value="inital solution with aspire apphost and centralized package versioning" />
     <MESSAGE value="setup first projects on solution" />
     <MESSAGE value="adding the frontends" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding the frontends" />
+    <MESSAGE value="starting with domain model" />
+    <MESSAGE value="Frontends with MudBlazor now" />
+    <option name="LAST_COMMIT_MESSAGE" value="Frontends with MudBlazor now" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

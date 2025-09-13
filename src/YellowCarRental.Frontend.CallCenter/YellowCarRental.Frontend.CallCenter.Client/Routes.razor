@@ -1,0 +1,22 @@
+﻿@using Microsoft.AspNetCore.Components
+
+<Router AppAssembly="typeof(Program).Assembly">
+    <Found Context="routeData">
+        <CascadingValue Name="AppTitle" Value="Title">
+            <CascadingValue Name="NavContent" Value="Nav">
+                <RouteView RouteData="routeData" DefaultLayout="typeof(SmartSolutionsLab.YellowCarRental.Frontend.Shared.Components.Layout.MainLayout)"/>
+                <FocusOnNavigate RouteData="routeData" Selector="h1"/>
+            </CascadingValue>
+        </CascadingValue>
+    </Found>
+</Router>
+
+@code {
+    private static readonly string Title = "Yellow Car Rental - Call Center";
+
+    private RenderFragment Nav => __builder =>
+    {
+        __builder.OpenComponent<ClientNavMenu>(0);
+        __builder.CloseComponent();
+    };
+}

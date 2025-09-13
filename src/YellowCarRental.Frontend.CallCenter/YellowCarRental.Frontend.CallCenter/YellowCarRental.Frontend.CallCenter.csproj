@@ -4,20 +4,12 @@
         <TargetFramework>net9.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <UserSecretsId>aspnet-YellowCarRental.Frontend.CallCenter-d4b1d0a3-8167-418b-b0be-ca49ee33b09a</UserSecretsId>
     </PropertyGroup>
 
-    <ItemGroup>
-        <None Update="Data\app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true"/>
-    </ItemGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\YellowCarRental.Frontend.CallCenter.Client\YellowCarRental.Frontend.CallCenter.Client.csproj"/>
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" />
-        <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" />
-        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server"/>
     </ItemGroup>
 
 </Project>
