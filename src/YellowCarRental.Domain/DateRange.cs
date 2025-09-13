@@ -2,12 +2,14 @@
 
 public record DateRange(DateOnly Start, DateOnly End) : IValueObject
 {
-    public static DateRange Create(DateOnly start, DateOnly end)
+    public static DateRange From(DateOnly start, DateOnly end)
     {
         if (end < start) throw new ArgumentException("End before start");
         if (start < DateOnly.FromDateTime(DateTime.UtcNow.Date)) throw new ArgumentException("Start in the past");
         return new DateRange(start, end);
     }
+    
+    public static DateRange From(DateTime start, DateTime end) => From(DateOnly.FromDateTime(start), DateOnly.FromDateTime(end));
 
     public int TotalDaysInclusive()
     {

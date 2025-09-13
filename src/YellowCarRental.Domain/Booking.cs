@@ -2,22 +2,29 @@
 
 public class Booking : IRootEntity
 {
-    public Guid Id { get; private set; }
-    public Guid VehicleId { get; private set; }
+    public BookingIdentifier Id { get; private set; }
+    public VehicleIdentifier VehicleId { get; private set; }
     public Guid CustomerId { get; private set; }
     public DateRange Period { get; private set; }
-    public decimal TotalPrice { get; private set; }
+    public Money TotalPrice { get; private set; }
 
-    private Booking() { } // EF Core
-
-    public Booking(Guid vehicleId, Guid customerId, DateRange period, decimal pricePerDay)
+    private Booking()
     {
-        Id = Guid.NewGuid();
+    } // EF Core
+
+    private Booking(VehicleIdentifier vehicleId, Guid customerId, DateRange period, Money pricePerDay)
+    {
+        Id = BookingIdentifier.New();
         VehicleId = vehicleId;
         CustomerId = customerId;
         Period = period;
 
         var days = period.TotalDaysInclusive();
-        TotalPrice = days * pricePerDay;
+        TotalPrice = Money.Of(days * pricePerDay.Amount, pricePerDay.Currency);
+    }
+
+    public static Booking From(VehicleIdentifier vehicleId, Guid customerId, DateRange period, Money pricePerDay)
+    {
+        return new Booking(vehicleId, customerId, period, pricePerDay);
     }
 }

@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
     <PropertyGroup>
         <TargetFramework>net9.0</TargetFramework>
@@ -8,10 +8,10 @@
 
     <ItemGroup>
       <ProjectReference Include="..\YellowCarRental.Api.Contracts\YellowCarRental.Api.Contracts.csproj" />
-      <ProjectReference Include="..\YellowCarRental.Domain\YellowCarRental.Domain.csproj" />
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" />
       <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" />
     </ItemGroup>
 
