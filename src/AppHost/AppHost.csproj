@@ -15,4 +15,8 @@
         <PackageReference Include="Aspire.Hosting.AppHost" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\YellowCarRental.Frontend.Public\YellowCarRental.Frontend.Public\YellowCarRental.Frontend.Public.csproj" />
+    </ItemGroup>
+
 </Project>
