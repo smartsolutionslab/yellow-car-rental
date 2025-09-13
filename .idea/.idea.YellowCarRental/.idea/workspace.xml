@@ -15,17 +15,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d7d35477-cc4c-4f20-a938-b67bba0197b5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.YellowCarRental/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.YellowCarRental/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Directory.Packages.props" beforeDir="false" afterPath="$PROJECT_DIR$/Directory.Packages.props" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/YellowCarRental.Domain/Booking.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/YellowCarRental.Domain/DateRange.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/YellowCarRental.Domain/IEntity.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/YellowCarRental.Domain/IRootEntity.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/YellowCarRental.Domain/IValueObject.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/YellowCarRental.sln" beforeDir="false" afterPath="$PROJECT_DIR$/YellowCarRental.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppHost/AppHost.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppHost/AppHost.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppHost/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppHost/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Domain/YellowCarRental.Domain.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Domain/YellowCarRental.Domain.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Frontend.Public/YellowCarRental.Frontend.Public.Client/YellowCarRental.Frontend.Public.Client.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Frontend.Public/YellowCarRental.Frontend.Public.Client/YellowCarRental.Frontend.Public.Client.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Frontend.Public/YellowCarRental.Frontend.Public/Components/_Imports.razor" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Frontend.Public/YellowCarRental.Frontend.Public/Components/_Imports.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Frontend.Public/YellowCarRental.Frontend.Public/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Frontend.Public/YellowCarRental.Frontend.Public/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Frontend.Public/YellowCarRental.Frontend.Public/YellowCarRental.Frontend.Public.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Frontend.Public/YellowCarRental.Frontend.Public/YellowCarRental.Frontend.Public.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRtental.Application/YellowCarRtental.Application.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter/Components/Account/Pages/ConfirmEmailChange.razor" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter/Components/Account/Pages/ConfirmEmailChange.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter/Components/Account/Pages/Login.razor" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter/Components/Account/Pages/Login.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Frontend.Public/YellowCarRental.Frontend.Public.Client/_Imports.razor" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Frontend.Public/YellowCarRental.Frontend.Public.Client/_Imports.razor" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +45,11 @@
     "accountId": "2664ae28-354d-482f-9521-7bba3cdede7e"
   }
 }]]></component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/YellowCarRental.Domain/DateRange.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js.map" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://D:/yellow-car-rental/src/YellowCarRental.Frontend.Public/YellowCarRental.Frontend.Public/Components/_Imports.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
   <component name="KubernetesApiProvider"><![CDATA[{
   "isMigrated": true
@@ -245,7 +248,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1758052150390</updated>
-      <workItem from="1758052152251" duration="5224000" />
+      <workItem from="1758052152251" duration="7284000" />
     </task>
     <task id="LOCAL-00001" summary="inital solution with aspire apphost and centralized package versioning">
       <option name="closed" value="true" />
@@ -263,7 +266,15 @@
       <option name="project" value="LOCAL" />
       <updated>1758054397430</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="adding the frontends">
+      <option name="closed" value="true" />
+      <created>1758057817126</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1758057817126</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -275,7 +286,8 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="inital solution with aspire apphost and centralized package versioning" />
     <MESSAGE value="setup first projects on solution" />
-    <option name="LAST_COMMIT_MESSAGE" value="setup first projects on solution" />
+    <MESSAGE value="adding the frontends" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding the frontends" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
