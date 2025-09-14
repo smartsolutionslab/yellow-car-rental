@@ -4,15 +4,18 @@ public sealed class Station : IRootEntity
 {
     public StationIdentifier Id { get; }
     public StationName Name { get; }
+    
+    public StationAddress Address { get; private set; }
 
 
-    private Station(StationIdentifier id, StationName name)
+    private Station(StationIdentifier id, StationName name, StationAddress address)
     {
         Id = id;
         Name = name;
+        Address = address;
     }
 
-    public static Station From(StationIdentifier id, StationName name) => new(id, name);
+    public static Station From(StationIdentifier id, StationName name, StationAddress address) => new(id, name, address);
     
 
     private readonly List<VehicleIdentifier> _currentVehicleIds = [];

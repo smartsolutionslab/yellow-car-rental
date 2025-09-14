@@ -8,4 +8,6 @@ public class VehicleData
     public required string Fuel { get; set; } = string.Empty;
     public required string Transmission { get; set; } = string.Empty;
     public decimal PricePerDay { get; set; }
+    
+    public Guid? StationId { get; set; }
 }

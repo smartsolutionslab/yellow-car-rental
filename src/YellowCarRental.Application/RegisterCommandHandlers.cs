@@ -15,15 +15,18 @@ public static class RegisterCommandHandlers
         where TBuilder : IHostApplicationBuilder
     {
         // Vehicle handlers
-        builder.Services.AddScoped<IQueryCommandHandler<SearchVehiclesQueryCommand, SearchVehiclesQueryResult>, VehicleCommandHandlers>();
+        builder.Services.AddScoped<IQueryCommandHandler<SearchAvailableVehiclesQueryCommand, SearchVehiclesQueryResult>, VehicleCommandHandlers>();
+        builder.Services.AddScoped<IQueryCommandHandler<ShowSimilarVehiclesCommand, SearchVehiclesQueryResult>, VehicleCommandHandlers>();
+        builder.Services.AddScoped<IQueryCommandHandler<ShowVehiclesCommand, VehicleData>, VehicleCommandHandlers>();
         
-        // Vehicle handlers
+        // Stations handlers
         builder.Services.AddScoped<IQueryCommandHandler<ListAllStationsQueryCommand, ListStationsQueryResult>, StationsCommandHandlers>();
         
         // Booking handlers
         builder.Services.AddScoped<IQueryCommandHandler<ListAllBookingsQueryCommand, SearchBookingsQueryResult>, BookingCommandHandlers>();
         builder.Services.AddScoped<IQueryCommandHandler<SearchBookingsQueryCommand, SearchBookingsQueryResult>, BookingCommandHandlers>();
         builder.Services.AddScoped<IQueryCommandHandler<CheckBookingAvailabilityQueryCommand, SearchBookingsQueryResult>, BookingCommandHandlers>();
+        builder.Services.AddScoped<IQueryCommandHandler<ShowBookingByCustomerQueryCommand, SearchBookingsQueryResult>, BookingCommandHandlers>();
         
         builder.Services.AddScoped<ICommandHandler<BookVehicleCommand, BookingIdentifier>, BookingCommandHandlers>();
         builder.Services.AddScoped<ICommandHandler<CancelBookingCommand, BookingIdentifier>, BookingCommandHandlers>();
@@ -32,6 +35,7 @@ public static class RegisterCommandHandlers
         builder.Services.AddScoped<ICommandHandler<RegisterCustomerCommand, CustomerIdentifier>, CustomerCommandHandlers>();
         builder.Services.AddScoped<IQueryCommandHandler<ShowAllCustomersCommand, ListCustomersQueryResult>, CustomerCommandHandlers>();
         builder.Services.AddScoped<IQueryCommandHandler<ShowCustomerCommand, CustomerData>, CustomerCommandHandlers>();
+        builder.Services.AddScoped<IQueryCommandHandler<SearchCustomerCommand, SearchCustomersQueryResult>, CustomerCommandHandlers>();
 
         return builder;
     }

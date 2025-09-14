@@ -2,7 +2,7 @@
 
 namespace SmartSolutionsLab.YellowCarRental.Application.Contracts.Vehicle;
 
-public record SearchVehiclesQueryCommand(
+public record SearchAvailableVehiclesQueryCommand(
     DateRange Period, 
     StationIdentifier? StationId, 
     VehicleCategory? Category) : IQueryCommand;

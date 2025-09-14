@@ -1,0 +1,143 @@
+@page "/booking"
+@using SmartSolutionsLab.YellowCarRent.Frontend.ApiClient
+@using SmartSolutionsLab.YellowCarRental.Application.Contracts.Booking
+@using SmartSolutionsLab.YellowCarRental.Application.Contracts.Customer
+@using SmartSolutionsLab.YellowCarRental.Application.Contracts.Station
+@using SmartSolutionsLab.YellowCarRental.Application.Contracts.Vehicle
+@using SmartSolutionsLab.YellowCarRental.Domain
+@using SmartSolutionsLab.YellowCarRental.Frontend.Shared.Components
+@using DateRange = SmartSolutionsLab.YellowCarRental.Domain.DateRange
+
+@inject CustomerApiClient CustomerApi
+@inject BookingApiClient BookingApi
+@inject StationApiClient StationApi
+@inject VehicleApiClient VehicleApi
+
+@inject NavigationManager Nav
+
+<PageTitle>Yellow Car Rental</PageTitle>
+
+<MudText Typo="Typo.h5" Class="pa-6 ma-6">Ausgewähltes Fahrzeug Buchung</MudText>
+
+<MudPaper Class="pa-6 ma-6" Elevation="4">
+
+    
+    <MudGrid>
+        <MudItem xs="12" sm="12">
+            <MudTextField Label="Fahrzeug" Value="@vehicle.Name" Disabled="true"/>
+        </MudItem>
+        <MudItem xs="12" sm="6">
+            <MudTextField Label="Kategorie" Value="@category.Name" Disabled="true"/>
+        </MudItem>
+
+        <MudItem xs="12" sm="6">
+            <MudTextField Label="Abholung Rückgabe" Value="@station.Name" Disabled="true"/>
+        </MudItem>
+        
+        <MudItem xs="12" sm="6">
+            <MudDatePicker Label="Abholdatum" Date="@Start" Disabled="true"/>
+        </MudItem>
+        <MudItem xs="12" sm="6">
+            <MudDatePicker Label="Rückgabedatum" Date="@End" Disabled="true"/>
+        </MudItem>
+    </MudGrid>
+
+    <MudDivider Class="my-4"/>
+    <MudText Typo="Typo.h6" Class="mb-2">Ihre Daten</MudText>
+    <MudGrid>
+        <MudItem xs="12" sm="6"><MudTextField Label="Vorname" @bind-Value="Customer.FirstName" ReadOnly="true" Required="true"/></MudItem>
+        <MudItem xs="12" sm="6"><MudTextField Label="Nachname" @bind-Value="Customer.LastName" ReadOnly="true" Required="true"/></MudItem>
+        <MudItem xs="12" sm="6"><MudDatePicker Label="Geburtsdatum" @bind-Date="Customer.BirthDate" ReadOnly="true" Required="true"/></MudItem>
+        <MudItem xs="12" sm="6"><MudTextField Label="E-Mail" @bind-Value="Customer.Email" ReadOnly="true" Required="true"/></MudItem>
+        <MudItem xs="12"><MudTextField Label="Straße" @bind-Value="Customer.Street" ReadOnly="true" Required="true"/></MudItem>
+        <MudItem xs="12" sm="4"><MudTextField Label="PLZ" @bind-Value="Customer.Zip" ReadOnly="true" Required="true"/></MudItem>
+        <MudItem xs="12" sm="8"><MudTextField Label="Ort" @bind-Value="Customer.City" ReadOnly="true" Required="true"/></MudItem>
+        <!--MudItem xs="12" sm="6"><MudTextField Label="Land" @bind-Value="Customer.Country" Required="true"/></!--MudItem-->
+    </MudGrid>
+
+    <MudDivider Class="my-4"/>
+
+    <MudText Typo="Typo.h6">Gesamtpreis: @totalPrice €</MudText>
+
+    <MudDivider Class="my-4"/>
+
+    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="SaveBooking">Buchung abschließen</MudButton>
+    <MudButton Variant="Variant.Outlined" OnClick="NavigateBackToSearch">Abbrechen</MudButton>
+</MudPaper>
+
+@code {
+    [SupplyParameterFromQuery] public Guid VehicleId { get; set; }
+    [SupplyParameterFromQuery] public Guid StationId { get; set; }
+    [SupplyParameterFromQuery] public DateTime? Start { get; set; }
+    [SupplyParameterFromQuery] public DateTime? End { get; set; }
+
+    private VehicleData vehicle = null!;
+    private VehicleCategory category = null!;
+    private StationData station = null!;
+    private decimal totalPrice = 0m;
+
+    private CustomerData Customer { get; set; } = new();
+
+    private ICurrentUserProfile CurrentUser { get; set; } = null!;
+    
+    
+    protected override async Task OnInitializedAsync()
+    {
+        CurrentUser = new CurrentUserProfile(CustomerApi);
+        await CurrentUser.InitializeAsync();
+        
+        var currentUser = CurrentUser.GetCustomerData();
+        if (currentUser != null)
+        {
+            Customer = currentUser;
+        }
+        else
+        {
+            throw new Exception("Should not happen");
+        }
+        
+        vehicle = await VehicleApi.FindVehicleByIdAsync(VehicleIdentifier.Of(VehicleId));
+        category = VehicleCategory.FromKey(vehicle.Category);
+        var allStations = (await StationApi.ListStationsAsync()).Stations;
+        station = allStations.Single(s => s.Id == StationId);
+
+        if (Start != null && End != null)
+        {
+            var calcResult = RentalPriceCalculator.CalcPrice(
+                DateRange.From(Start.Value, End.Value),
+                Money.Of(vehicle.PricePerDay, "EUR"));
+            totalPrice = calcResult.Amount;
+        }
+        else
+        {
+            totalPrice = 0;
+        }
+    }
+
+    private async Task SaveBooking()
+    {
+        var currentCustomer = CurrentUser.GetCustomerData();
+
+        if (currentCustomer != null && Start != null && End != null)
+        {
+            var bookVehicleCommand = new BookVehicleCommand(
+                VehicleIdentifier.Of(VehicleId),
+                BookingCustomer.From(
+                    currentCustomer.Id,
+                    currentCustomer.FirstName,
+                    currentCustomer.LastName,
+                    currentCustomer.LastName,
+                    DateOnly.FromDateTime(currentCustomer.BirthDate!.Value)),
+                StationIdentifier.Of(StationId),
+                StationIdentifier.Of(StationId),
+                DateRange.From(Start.Value, End.Value));
+
+            var result = await BookingApi.BookVehicle(bookVehicleCommand);
+
+            NavigateToBookings();
+        }
+    }
+
+    private void NavigateBackToSearch() => Nav.NavigateTo("/vehicles");
+    private void NavigateToBookings() => Nav.NavigateTo("/bookings");
+}

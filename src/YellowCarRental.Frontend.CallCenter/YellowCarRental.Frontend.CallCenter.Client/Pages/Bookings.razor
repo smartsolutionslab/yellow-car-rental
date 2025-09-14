@@ -1,0 +1,129 @@
+﻿@page "/bookings"
+@using SmartSolutionsLab.YellowCarRent.Frontend.ApiClient
+@using SmartSolutionsLab.YellowCarRental.Application.Contracts.Booking
+@using SmartSolutionsLab.YellowCarRental.Application.Contracts.Customer
+@using SmartSolutionsLab.YellowCarRental.Application.Contracts.Station
+@using SmartSolutionsLab.YellowCarRental.Domain
+@using DateRange = MudBlazor.DateRange
+
+@inject BookingApiClient BookingApi
+
+<PageTitle>Call Center - Alle Buchungen</PageTitle>
+@inject StationApiClient StationApi
+
+<MudText Class="pt-2 pb=2 pa-6 mt-2 pb-2 ma-6" Typo="Typo.h4" GutterBottom="true">Alle Buchungen</MudText>
+
+<MudPaper Class="pa-6 ma-6">
+    
+    <MudGrid>
+        <MudItem xs="12" sm="4">
+            <MudDateRangePicker Label="Zeitraum" @bind-DateRange="_dateRange"/>
+        </MudItem>
+        <MudItem xs="12" sm="4">
+            <MudSelect T="Guid" Label="Station" @bind-Value="_stationId">
+                <MudSelectItem Value="@Guid.Empty">Alle Stationen</MudSelectItem>
+                @foreach (var station in _stations)
+                {
+                    <MudSelectItem Value="@station.Id">@station.Name</MudSelectItem>
+                }
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="12" sm="4">
+            <MudTextField @bind-Value="_searchTerm" Placeholder="Suchen..."/>
+        </MudItem>
+    </MudGrid>
+    <MudButton Class="mt-8 mb=8" Variant="Variant.Filled" Color="Color.Primary" OnClick="ApplyFilter">Filtern</MudButton>
+    
+    
+    <MudTable Items="_bookings" Hover="true" Dense="false">
+        <HeaderContent>
+            <MudTh>Fahrzeug</MudTh>
+            <MudTh>Abholung und Rückgabe</MudTh>
+            <MudTh>Zeitraum</MudTh>
+            <MudTh>Entleiher</MudTh>
+            <MudTh>Status</MudTh>
+            <MudTh>Preis</MudTh>
+            <MudTh></MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Fahrzeug">@context.VehicleName</MudTd>
+            <MudTd DataLabel="Abholung und Rückgabe">@ResolveStationName(@context.PickupStationId)</MudTd>
+            <MudTd DataLabel="Zeitraum">@($"{context.StartDate:dd.MM.yyyy} - {context.EndDate:dd.MM.yyyy}")</MudTd>
+            <MudTd DataLabel="Entleiher">@($"{context.Customer.FirstName} {context.Customer.LastName}, {context.Customer.BirthDate}")</MudTd>
+            <MudTd DataLabel="Status">
+                @if (context.Status == "Active")
+                {
+                    <MudChip T="String" Color="Color.Success">Aktiv</MudChip>
+                }
+                @if (context.Status == "Completed")
+                {
+                    <MudChip T="String" Color="Color.Warning">Abgeschlossen</MudChip>
+                }
+                else
+                {
+                    <MudChip T="String" Color="Color.Error">Storniert</MudChip>
+                }
+                </MudTd>
+            <MudTd DataLabel="Preis" Align="Right">@($"{context.TotalPrice:C}")</MudTd>
+            <MudTh>
+                @if (context.Status == "Active")
+                {
+                    <MudButton Variant="Variant.Outlined" Color="Color.Error" OnClick="() => CancelBooking(context.Id)">
+                        Stornieren
+                    </MudButton>
+                }
+            </MudTh>
+        </RowTemplate>
+    </MudTable>
+
+</MudPaper>
+
+@code {
+    private DateRange? _dateRange;
+    private Guid _stationId = Guid.Empty;
+    private string _searchTerm = "";
+    private List<BookingData> _bookings = new();
+    private List<StationData> _stations = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        _stations = (await StationApi.ListStationsAsync()).Stations.ToList();
+        _bookings = (await BookingApi.GetBookingsAsync()).Bookings.ToList();
+    }
+
+    private async Task ApplyFilter()
+    {
+        var period = Domain.DateRange.From(_dateRange!.Start!.Value, _dateRange!.End!.Value);
+        var selectedStationId = _stationId != Guid.Empty ? StationIdentifier.Of(_stationId) : null;
+        var searchTerm = !string.IsNullOrWhiteSpace(_searchTerm) ? new SearchTerm(_searchTerm) : null;
+
+        _bookings = (await BookingApi.SearchBookingsByAsync(
+                period,
+                searchTerm,
+                selectedStationId,
+                null))
+            .Bookings.ToList();
+    }
+    
+    public string ResolveStationName(Guid stationId)
+    {
+        var station = _stations.Find(s => s.Id == stationId);
+        return station?.Name ?? "Unbekannte Station";
+    }
+    
+    private async Task CancelBooking(Guid bookingId)
+    {
+        try
+        {
+            await BookingApi.CancelBookingAsync(BookingIdentifier.Of(bookingId));
+
+            var booking = _bookings?.FirstOrDefault(b => b.Id == bookingId);
+            if (booking is not null) booking.Status = "Cancelled";
+            StateHasChanged();
+        }
+        catch
+        {
+            throw new Exception("Error on cancelling booking"); ;
+        }
+    }
+}

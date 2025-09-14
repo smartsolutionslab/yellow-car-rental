@@ -1,0 +1,235 @@
+@page "/Booking"
+@using SmartSolutionsLab.YellowCarRent.Frontend.ApiClient
+@using SmartSolutionsLab.YellowCarRental.Application.Contracts.Booking
+@using SmartSolutionsLab.YellowCarRental.Application.Contracts.Customer
+@using SmartSolutionsLab.YellowCarRental.Application.Contracts.Station
+@using SmartSolutionsLab.YellowCarRental.Application.Contracts.Vehicle
+@using SmartSolutionsLab.YellowCarRental.Domain
+@using SmartSolutionsLab.YellowCarRental.Frontend.Shared.Components.Models
+@using DateRange = SmartSolutionsLab.YellowCarRental.Domain.DateRange
+
+@inject CustomerApiClient CustomerApi
+@inject VehicleApiClient VehicleApi
+@inject StationApiClient StationApi
+@inject BookingApiClient BookingApi
+@inject NavigationManager Nav
+
+<PageTitle>Neue Buchung</PageTitle>
+
+<MudText Typo="Typo.h5" Class="mb-4">Neue Buchung</MudText>
+
+<MudPaper Class="pa-4" Elevation="4">
+    <MudExpansionPanels>
+        <MudExpansionPanel Text="Fahrzeug & Zeitraum" Expanded="true">
+            <MudGrid>
+                <MudItem xs="12" sm="6">
+                    <MudDateRangePicker Label="Zeitraum" DateRange="Booking.Period" MinDate="_minDate" DateRangeChanged="OnDateRangeChanged" />
+                </MudItem>
+                <MudItem xs="12" sm="6">
+                    <MudSelect T="Guid" Label="Station" Value="Booking.StationId" Disabled="@HasPreselection" ValueChanged="OnStationChanged">
+                        <MudSelectItem Value="@Guid.Empty">Keine Auswahl</MudSelectItem>
+                        @foreach (var station in _stations)
+                        {
+                            <MudSelectItem T="Guid" Value="@station.Id">@station.Name</MudSelectItem>
+                        }
+                    </MudSelect>
+
+                </MudItem>
+                <MudItem xs="12" sm="6">
+                    <MudSelect T="Guid" Label="Fahrzeug" @bind-Value="Booking.VehicleId" Disabled="@HasPreselection">
+                        <MudSelectItem Value="@Guid.Empty">Keine Auswahl</MudSelectItem>
+                        @foreach (var vehicle in _vehicles)
+                        {
+                            <MudSelectItem T="Guid" Value="@vehicle.Id">@vehicle.Name</MudSelectItem>
+                        }
+                    </MudSelect>
+                </MudItem>
+
+            </MudGrid>
+        </MudExpansionPanel>
+
+        <MudExpansionPanel Text="Kunde" Expanded="true">
+            <MudRadioGroup T="CustomerMode"  @bind-SelectedOption="CustomerMode">
+                <MudRadio T="CustomerMode" Value="CustomerMode.Existing" Label="Bestehenden Kunden suchen"/>
+                <MudRadio T="CustomerMode" Value="CustomerMode.New" Label="Neuen Kunden anlegen"/>
+            </MudRadioGroup>
+
+            @if (CustomerMode == CustomerMode.Existing)
+            {
+                <MudTextField Label="Suche (Name / Adresse)" @bind-Value="CustomerSearch" Immediate="true" 
+                              OnBlur="@SearchCustomers"/>
+                
+                <MudList T="Guid" SelectedValue="SelectedCustomerId">
+                    @foreach (var c in SearchResults)
+                    {
+                        <MudListItem T="Guid" Value="@c.Id" OnClick="() => SelectCustomer(c)">
+                            @c.FirstName @c.LastName – @c.City
+                        </MudListItem>
+                    }
+                </MudList>
+            }
+            else
+            {
+                <MudGrid>
+                    <MudItem xs="6"><MudTextField Label="Vorname" @bind-Value="NewCustomer.FirstName"/></MudItem>
+                    <MudItem xs="6"><MudTextField Label="Nachname" @bind-Value="NewCustomer.LastName"/></MudItem>
+                    <MudItem xs="6"><MudDatePicker Label="Geburtsdatum" @bind-Date="NewCustomer.BirthDate"/></MudItem>
+                    <MudItem xs="12"><MudTextField Label="Straße" @bind-Value="NewCustomer.Street"/></MudItem>
+                    <MudItem xs="6"><MudTextField Label="PLZ" @bind-Value="NewCustomer.Zip"/></MudItem>
+                    <MudItem xs="6"><MudTextField Label="Ort" @bind-Value="NewCustomer.City"/></MudItem>
+                </MudGrid>
+            }
+        </MudExpansionPanel>
+    </MudExpansionPanels>
+    
+    <MudDivider Class="my-4"/>
+    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="SaveBooking">Buchung anlegen</MudButton>
+    <MudButton Variant="Variant.Outlined" OnClick="NavigateToVehicleSearch">Abbrechen</MudButton>
+</MudPaper>
+
+@code {
+    [SupplyParameterFromQuery] public Guid? VehicleId { get; set; }
+    [SupplyParameterFromQuery] public Guid? StationId { get; set; }
+    [SupplyParameterFromQuery] public DateTime? StartDate { get; set; }
+    [SupplyParameterFromQuery] public DateTime? EndDate { get; set; }
+
+    private BookingFormModel Booking { get; set; } = new();
+    private CustomerMode CustomerMode { get; set; } = CustomerMode.Existing;
+    private string CustomerSearch { get; set; } = "";
+    private List<CustomerData> SearchResults { get; set; } = new();
+    //private CustomerData? SelectedCustomer { get; set; }
+    private CustomerData NewCustomer { get; set; } = new();
+  
+    private List<StationData> _stations = new();
+    private List<VehicleData> _vehicles = new();
+
+    private readonly DateTime _minDate = DateTime.Today;
+
+    private bool HasPreselection => VehicleId != null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var stationResponse = await StationApi.ListStationsAsync();
+        _stations = stationResponse.Stations.ToList();
+
+        var range = new MudBlazor.DateRange(StartDate ?? DateTime.Today, EndDate ?? DateTime.Today.AddDays(5));
+
+        await LoadVehicles(range, StationId);
+
+        if (HasPreselection)
+        {
+            Booking.VehicleId = VehicleId ?? Guid.Empty;
+            Booking.StationId = StationId ?? Guid.Empty;
+            Booking.Period = range;
+        }
+    }
+
+    private async Task LoadVehicles(MudBlazor.DateRange? range, Guid? stationId)
+    {
+        if (range is not null && range.Start is not null && range.End is not null &&  stationId is not null && stationId != Guid.Empty)
+        {
+            var vehicleResponse = await VehicleApi.SearchVehiclesAsync(
+                DateRange.From(range.Start!.Value, range.End!.Value),
+                StationIdentifier.Of(stationId.Value),
+                null);
+
+            _vehicles = vehicleResponse.FoundVehicles.ToList();
+        }
+        else
+        {
+            _vehicles = new();
+        }
+    }
+
+    private async Task SearchCustomers()
+    {
+        SearchResults = (await CustomerApi.SearchCustomersAsync(
+            new SearchTerm(CustomerSearch))).Customers;
+    }
+
+    private void SelectCustomer(CustomerData customer)
+    {
+        Booking.Customer = new BookingCustomerData
+        {
+            Id = customer.Id,
+            Salutation = customer.Salutation,
+            FirstName = customer.FirstName,
+            LastName = customer.LastName,
+            BirthDate = DateOnly.FromDateTime(customer.BirthDate.GetValueOrDefault())
+        };
+
+        SelectedCustomerId = customer.Id;
+        CustomerSearch = $"{customer.FirstName} {customer.LastName}";
+    }
+
+    private async Task SaveBooking()
+    {
+        if (Booking.Customer is null) return;
+        
+        CustomerIdentifier customerId;
+
+        if (CustomerMode == CustomerMode.Existing && SelectedCustomerId != Guid.Empty)
+        {
+            customerId = CustomerIdentifier.Of(SelectedCustomerId);
+        }
+        else
+        {
+            var created = await CustomerApi.RegisterCustomerAsync(
+                new RegisterCustomerCommand(
+                    CustomerName.From(NewCustomer.Salutation, NewCustomer.FirstName, NewCustomer.LastName),
+                    BirthDate.From(DateOnly.FromDateTime(NewCustomer.BirthDate!.Value)), 
+                    CustomerAddress.From(NewCustomer.Street, NewCustomer.HouseNumber, NewCustomer.Zip, NewCustomer.City),
+                    new EMail(NewCustomer.Email)));
+            
+            customerId = CustomerIdentifier.Of(created.Id);
+            Booking.Customer.Id = customerId.Value;
+        }
+
+        var selectedStationId =  StationIdentifier.Of(Booking.StationId);
+        
+        var result = await BookingApi.BookVehicle(
+            new BookVehicleCommand(
+                VehicleIdentifier.Of(Booking.VehicleId),
+                BookingCustomer.From(
+                    Booking.Customer.Id,
+                    Booking.Customer.Salutation,
+                    Booking.Customer.FirstName,
+                    Booking.Customer.LastName,
+                    Booking.Customer.BirthDate),
+                selectedStationId,
+                selectedStationId,
+                DateRange.From(Booking.Period.Start!.Value, Booking.Period.End!.Value)));
+                
+
+        NavigateToBookings();
+    }
+
+    public Guid SelectedCustomerId { get; set; }
+
+    private void NavigateToBookings()
+    {
+        Nav.NavigateTo($"/bookings");
+    }
+    
+    private void NavigateToVehicleSearch()
+    {
+        Nav.NavigateTo("/vehicles");
+    }
+
+    private async Task UpdateVehiclesList()
+    {
+        await LoadVehicles(Booking.Period, Booking.StationId);
+    }
+
+    private async Task OnDateRangeChanged(MudBlazor.DateRange value)
+    {
+        Booking.Period = value;
+        await UpdateVehiclesList();
+    }
+
+    private async Task OnStationChanged(Guid value)
+    {
+        Booking.StationId = value;
+        await UpdateVehiclesList();
+    }
+}

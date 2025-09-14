@@ -5,4 +5,5 @@ namespace SmartSolutionsLab.YellowCarRental.Application.Contracts.Customer;
 public sealed record RegisterCustomerCommand(
     CustomerName Name,
     BirthDate BirthDate,
-    CustomerAddress Address) : ICommand;
+    CustomerAddress Address,
+    EMail EMail) : ICommand;

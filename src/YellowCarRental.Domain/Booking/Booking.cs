@@ -37,13 +37,36 @@ public class Booking : IRootEntity
 
     public static Booking From(
         VehicleIdentifier vehicleId, 
+        Customer customer, 
+        DateRange period, 
+        StationIdentifier pickupStationId, 
+        StationIdentifier returnStationId, 
+        Money pricePerDay)
+    {
+        return new Booking(
+            vehicleId, 
+            BookingCustomer.From(customer), 
+            period, 
+            pickupStationId, 
+            returnStationId, 
+            pricePerDay);
+    }
+    
+    public static Booking From(
+        VehicleIdentifier vehicleId, 
         BookingCustomer customer, 
         DateRange period, 
         StationIdentifier pickupStationId, 
         StationIdentifier returnStationId, 
         Money pricePerDay)
     {
-        return new Booking(vehicleId, customer, period, pickupStationId, returnStationId, pricePerDay);
+        return new Booking(
+            vehicleId, 
+            customer, 
+            period, 
+            pickupStationId, 
+            returnStationId, 
+            pricePerDay);
     }
     
     public void Cancel()
@@ -51,5 +74,13 @@ public class Booking : IRootEntity
         if (Status == BookingStatus.Cancelled) throw new InvalidOperationException("Booking is already cancelled.");
 
         Status = BookingStatus.Cancelled;
+    }
+    
+    public void Complete()
+    {
+        if (Status == BookingStatus.Completed) throw new InvalidOperationException("Booking is already completed.");
+        if (Status == BookingStatus.Cancelled) throw new InvalidOperationException("Cancelled booking cannot be completed.");
+
+        Status = BookingStatus.Completed;
     }
 }

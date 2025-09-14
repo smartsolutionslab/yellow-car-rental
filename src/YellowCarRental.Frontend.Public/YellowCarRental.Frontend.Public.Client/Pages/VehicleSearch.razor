@@ -1,0 +1,164 @@
+@page "/vehicles"
+
+@using SmartSolutionsLab.YellowCarRent.Frontend.ApiClient
+@using SmartSolutionsLab.YellowCarRental.Application.Contracts.Station
+@using SmartSolutionsLab.YellowCarRental.Application.Contracts.Vehicle
+@using SmartSolutionsLab.YellowCarRental.Domain
+@using DateRange = MudBlazor.DateRange
+@inject VehicleApiClient VehicleApi
+@inject StationApiClient StationApi
+
+<PageTitle>Yello Car Rental - Fahrzeugsuche</PageTitle>
+
+<MudText Class="pa-6 ma-6" Typo="Typo.h4" GutterBottom="true">Fahrzeugsuche</MudText>
+
+<MudPaper Class="pa-6 ma-6" Elevation="2">
+    <MudGrid>
+        <MudItem xs="12" sm="4">
+            <MudDateRangePicker Label="Zeitraum" @bind-DateRange="_selectedRange " MinDate="_minDate" />
+        </MudItem>
+
+        <MudItem xs="12" sm="4">
+            <MudSelect T="Guid" Label="Station" @bind-Value="_selectedStationId">
+                <MudSelectItem Value="@Guid.Empty">Alle Stationen</MudSelectItem>
+                @foreach (var station in _stations)
+                {
+                    <MudSelectItem T="Guid" Value="@station.Id">@station.Name</MudSelectItem>
+                }
+            </MudSelect>
+        </MudItem>
+
+        <MudItem xs="12" sm="4">
+            <MudSelect T="String" Label="Kategorie" @bind-Value="_selectedCategory">
+                @foreach (var category in VehicleCategory.All)
+                {
+                    <MudSelectItem Value="category.Key">@category.Name</MudSelectItem>                    
+                }
+            </MudSelect>
+        </MudItem>
+    </MudGrid>
+
+    <MudButton Variant="Variant.Filled" Disabled="@(_selectedRange == null)" Color="Color.Primary" Class="mt-8" StartIcon="@Icons.Material.Filled.Search"
+               OnClick="SearchVehicles">
+        Fahrzeuge suchen
+    </MudButton>
+</MudPaper>
+
+@if (_vehicles is not null && _vehicles.Any())
+{
+    <MudTable FixedHeader="true" Items="_vehicles" Class="pa-6 ma-6" Hover="true" Dense="false">
+        <HeaderContent>
+            <MudTh>Fahrzeug</MudTh>
+            @if(_selectedStationId == Guid.Empty)
+            {
+                <MudTh>Station</MudTh>
+            }
+            <MudTh>Kategorie</MudTh>
+            <MudTh>Kraftstoff</MudTh>
+            <MudTh>Getriebe</MudTh>
+            <MudTh>Preis/Tag</MudTh>
+            <MudTh></MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Fahrzeug">@context.Name</MudTd>
+            @if(_selectedStationId == Guid.Empty)
+            {
+                <MudTd DataLabel="Station">@ResolveStationName(context.StationId)</MudTd>
+            }
+            <MudTd DataLabel="Kategorie">@VehicleCategory.FromKey(context.Category).Name</MudTd>
+            <MudTd DataLabel="Kraftstoff">@FuelType.FromKey(context.Fuel).Name</MudTd>
+            <MudTd DataLabel="Getriebe">@TransmissionType.FromKey(context.Transmission).Name</MudTd>
+            <MudTd DataLabel="Preis/Tag">@($"{context.PricePerDay:C}")</MudTd>
+            <MudTh>
+                <MudButton  Class="item-button" Color="Color.Error" Icon="@Icons.Material.Filled.Start" Href="@ResolveBookingUrl(context)">
+                    Buchen
+                </MudButton>
+            </MudTh>    
+        </RowTemplate>
+    </MudTable>
+}
+
+@if (_similarVehicles?.Any() == true)
+{
+    <MudText Typo="Typo.h5" Color="Color.Primary" Class="pa-6 ma-6">
+        Diese ähnlichen Fahrzeuge könnten auch passen
+    </MudText>
+    
+    <MudDivider Class="my-4" />
+   
+
+    <MudTable Class="pa-6 ma-6" Items="_similarVehicles" Hover="true" Bordered="true">
+        <HeaderContent>
+            <MudTh>Fahrzeug</MudTh>
+            <MudTh>Station</MudTh>
+            <MudTh>Kategorie</MudTh>
+            <MudTh>Kraftstoff</MudTh>
+            <MudTh>Getriebe</MudTh>
+            <MudTh>Preis/Tag</MudTh>
+            <MudTh></MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Fahrzeug" >@context.Name</MudTd>
+            <MudTd DataLabel="Station">@ResolveStationName(context.StationId)</MudTd>
+            <MudTd DataLabel="Kategorie">@VehicleCategory.FromKey(context.Category).Name</MudTd>
+            <MudTd DataLabel="Kraftstoff">@FuelType.FromKey(context.Fuel).Name</MudTd>
+            <MudTd DataLabel="Getriebe">@TransmissionType.FromKey(context.Transmission).Name</MudTd>
+            <MudTd>@context.PricePerDay €</MudTd>
+            <MudTd></MudTd>
+            <MudTd>
+                <MudButton Variant="Variant.Filled" Color="Color.Secondary" Href="@ResolveBookingUrl(context)">
+                    Jetzt buchen
+                </MudButton>
+            </MudTd>
+        </RowTemplate>
+    </MudTable>
+}
+
+@code {
+    private DateRange? _selectedRange = new (DateTime.Today, DateTime.Today.AddDays(7)); // default to today + 7 days
+    private readonly DateTime _minDate = DateTime.Today;
+    private Guid _selectedStationId;
+    private string? _selectedCategory;
+    private List<StationData> _stations = [];
+
+    //TODO: refactor back to VihicleVm private List<VehicleVm>? _vehicles;
+    private List<VehicleData>? _vehicles = [];
+    private List<VehicleData>? _similarVehicles = [];
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        
+        var stationResponse = await StationApi.ListStationsAsync();
+        _stations = stationResponse.Stations.ToList();
+    }
+
+    private async Task SearchVehicles()
+    {
+
+        var response = await VehicleApi.SearchVehiclesAsync(
+            Domain.DateRange.From(
+                _selectedRange?.Start ?? DateTime.Today,
+                _selectedRange?.End ?? DateTime.Today.AddDays(7)), 
+            StationIdentifier.IfPossibleOf(_selectedStationId),
+                VehicleCategory.IfPossibleFromKey(_selectedCategory)
+        );
+
+        _vehicles = response.FoundVehicles;
+        _similarVehicles = response.SimilarVehicles;
+    }
+    
+    private string ResolveBookingUrl(VehicleData vehicle)
+    {
+        var start = _selectedRange?.Start?.ToString("yyyy-MM-dd");
+        var end = _selectedRange?.End?.ToString("yyyy-MM-dd");
+        return $"/booking?VehicleId={vehicle.Id}&Start={start}&End={end}&StationId={vehicle.StationId}&Category={_selectedCategory}";
+    }
+    
+    public string ResolveStationName(Guid? stationId)
+    {
+        var station = _stations.Find(s => s.Id == stationId);
+        return station?.Name ?? "Unbekannte Station";
+    }
+}
+

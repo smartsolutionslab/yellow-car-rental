@@ -1,44 +1,80 @@
-﻿using System.Reflection.Metadata.Ecma335;
+﻿using Microsoft.EntityFrameworkCore;
+using SmartSolutionsLab.YellowCarRental.Application.Contracts.Customer;
 using SmartSolutionsLab.YellowCarRental.Domain;
 
 namespace SmartSolutionsLab.YellowCarRental.Infrastructure.Persistence;
 
-public class Bookings : IBookings
+public class Bookings(RentalDbContext dbContext) : IBookings
 {
-    private readonly List<Booking> _bookings = new();
-    
-    public Task<IList<Booking>> All()
+    public async Task<IReadOnlyList<Booking>> All()
     {
-        return Task.FromResult<IList<Booking>>(_bookings.ToList());
+        return await dbContext.Bookings.AsNoTracking().ToListAsync();
     }
 
-    public Task<IList<Booking>> With(DateRange period, StationIdentifier? stationId, CustomerIdentifier? customerId)
+    public async Task<IReadOnlyList<Booking>> With(
+        DateRange? period, 
+        SearchTerm? searchTerm, 
+        StationIdentifier? stationId, 
+        CustomerIdentifier? customerId)
     {
-        throw new NotImplementedException();
+        var query = dbContext.Bookings.AsQueryable();
+
+        if (period is not null)
+        {
+            query = query.Where(booking => booking.Period.Start <= period.End && booking.Period.End >= period.Start);
+        }
+
+        if (stationId is not null)
+        {
+            query = query.Where(booking => booking.PickupStationId == stationId || booking.ReturnStationId == stationId);
+        }
+        
+        if (customerId is not null)
+        {
+            query = query.Where(booking => booking.Customer.Id == customerId);
+        }
+        
+        if (searchTerm is not null)
+        {
+            query = query.Where(booking => EF.Functions.Like(booking.Customer.Name.FirstName.Value, searchTerm.Value) ||
+                                           EF.Functions.Like(booking.Customer.Name.LastName.Value, searchTerm.Value));
+
+        }
+
+
+
+        return await query.AsNoTracking().ToListAsync();
+
     }
 
-    public Task<IList<Booking>> ForVehicle(VehicleIdentifier vehicleId, DateRange period)
+    public async Task<IReadOnlyList<Booking>> ForVehicle(VehicleIdentifier vehicleId, DateRange period)
     {
-        var query = _bookings.Where(booking => booking.VehicleId == vehicleId)
+        await Task.CompletedTask;
+        
+        var query = dbContext.Bookings.Where(booking => booking.VehicleId == vehicleId)
             .Where(booking => booking.Period.Start <= period.End && booking.Period.End >= period.Start);
 
-        return Task.FromResult((IList<Booking>)query.ToList());
+        var foundBookings = await query.AsNoTracking().ToListAsync();
+
+        return foundBookings;
     }
 
-    public Task<Booking> FindById(BookingIdentifier bookingId)
+    public async Task<Booking> FindById(BookingIdentifier bookingId)
     {
-        return Task.FromResult(_bookings.SingleOrDefault(booking => booking.Id == bookingId)!) ?? throw new Exception($"Booking with ID {bookingId} not found");
+        var foundBooking = await dbContext.Bookings.SingleOrDefaultAsync(booking => booking.Id == bookingId);
+        
+        return foundBooking ?? throw new PersistenceException($"Booking with ID {bookingId} not found");
     }
 
-    public Task Add(Booking booking)
+    public async Task Add(Booking booking)
     {
-        _bookings.Add(booking);
-        return Task.CompletedTask;
+        dbContext.Bookings.Add(booking);
+        await dbContext.SaveChangesAsync();
     }
 
-    public Task Update(Booking booking)
+    public async Task Update(Booking booking)
     {
-        // Do nothing for in-memory implementation
-        return Task.CompletedTask;
+        dbContext.Update(booking);
+        await dbContext.SaveChangesAsync();
     }
 }

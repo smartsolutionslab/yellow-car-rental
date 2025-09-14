@@ -8,23 +8,24 @@
 <MudPaper Class="p-6 max-w-xl mx-auto" Elevation="4">
     <MudText Typo="Typo.h5" Class="mb-4">📝 Registrierung</MudText>
 
-    <MudForm @ref="_form" Model="_customer">
-        <MudSelect @bind-Value="_customer.Salutation" Label="Anrede">
+    <MudForm @ref="_form" Model="_formModel">
+        <MudSelect @bind-Value="_formModel.Salutation" Label="Anrede">
             @foreach(var salutation in Salutation.All )
             {
                 <MudSelectItem T="Salutation" Value="@salutation">@salutation</MudSelectItem>
             }
         </MudSelect>
 
-        <MudTextField @bind-Value="_customer.FirstName" Label="Vorname" Required="true" />
-        <MudTextField @bind-Value="_customer.LastName" Label="Nachname" Required="true" />
+        <MudTextField @bind-Value="_formModel.FirstName" Label="Vorname" Required="true" />
+        <MudTextField @bind-Value="_formModel.LastName" Label="Nachname" Required="true" />
 
-        <MudDatePicker @bind-Date="_customer.BirthDate" Label="Geburtsdatum" />
-
-        <MudTextField @bind-Value="_customer.Street" Label="Straße" Required="true" />
-        <MudTextField @bind-Value="_customer.HouseNumber" Label="Hausnummer" Required="true" />
-        <MudTextField @bind-Value="_customer.Zip" Label="PLZ" Required="true" />
-        <MudTextField @bind-Value="_customer.City" Label="Ort" Required="true" />
+        <MudDatePicker @bind-Date="_formModel.BirthDate" Label="Geburtsdatum" />
+        <MudTextField @bind-Value="_formModel.Email" Label="EMail" Required="true" InputType="InputType.Email" />
+        
+        <MudTextField @bind-Value="_formModel.Street" Label="Straße" Required="true" />
+        <MudTextField @bind-Value="_formModel.HouseNumber" Label="Hausnummer" Required="true" />
+        <MudTextField @bind-Value="_formModel.Zip" Label="PLZ" Required="true" />
+        <MudTextField @bind-Value="_formModel.City" Label="Ort" Required="true" />
 
         <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-4" OnClick="RegisterCustomer">
             ➕ Registrieren
@@ -39,24 +40,25 @@
 
 @code {
     private MudForm? _form;
-    private CustomerVm _customer = new();
+    private CustomerFormModel _formModel = new();
     private string _message = "";
 
     private async Task RegisterCustomer()
     {
-        if (_customer is null)
+        if (_formModel is null)
         {
             throw new InvalidOperationException("Customer is not set!");
         }
 
         var created = await CustomerApi.RegisterCustomerAsync(new RegisterCustomerCommand(
-            CustomerName.From(_customer.Salutation.Value, _customer.FirstName, _customer.LastName),
-            BirthDate.From(DateOnly.FromDateTime(_customer.BirthDate.GetValueOrDefault(DateTime.MinValue))),
-            CustomerAddress.From(_customer.Street, _customer.HouseNumber, _customer.Zip, _customer.City)));
+            CustomerName.From(_formModel.Salutation, FirstName.From(_formModel.FirstName), LastName.From(_formModel.LastName)),
+            BirthDate.From(DateOnly.FromDateTime(_formModel.BirthDate.GetValueOrDefault(DateTime.MinValue))),
+            CustomerAddress.From(_formModel.Street, _formModel.HouseNumber, _formModel.Zip, _formModel.City),
+            new EMail(_formModel.Email)));
         
         _message = $"✅ Kunde erfolgreich angelegt! ID: {created.Id}";
-        // Weiterleitung nach Registrierung, z. B. zur Buchung
-        // Nav.NavigateTo("/booking");
+        
+        Nav.NavigateTo("/booking");
     
     }
 }

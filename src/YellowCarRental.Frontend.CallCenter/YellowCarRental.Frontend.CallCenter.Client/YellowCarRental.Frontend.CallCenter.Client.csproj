@@ -18,4 +18,9 @@
         <ProjectReference Include="..\..\YellowCarRental.Frontend.Shared.Components\YellowCarRental.Frontend.Shared.Components.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+        <Folder Include="Model\" />
+        
+    </ItemGroup>
+
 </Project>

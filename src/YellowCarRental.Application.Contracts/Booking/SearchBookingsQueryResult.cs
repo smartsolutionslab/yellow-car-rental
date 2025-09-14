@@ -2,5 +2,5 @@
 
 public record SearchBookingsQueryResult(List<BookingData> Bookings)
 {
-    public static SearchBookingsQueryResult Empty => new ([]);
+    public static SearchBookingsQueryResult Empty => new([]);
 }

@@ -10,7 +10,12 @@ public static class MappingExtensions
 {
     public static IEnumerable<VehicleData> ToData(this IEnumerable<Vehicle> vehicles)
     {
-        return vehicles.Select(vehicle => new VehicleData
+        return vehicles.Select(vehicle => vehicle.ToData());
+    }
+    
+    public static VehicleData ToData(this Vehicle vehicle)
+    {
+        return new VehicleData
         {
             Id = vehicle.Id.Value,
             Name = vehicle.Name.Value,
@@ -18,7 +23,8 @@ public static class MappingExtensions
             Fuel = vehicle.Fuel.Key,
             Transmission = vehicle.Transmission.Key,
             PricePerDay = vehicle.PricePerDay.Amount,
-        });
+            StationId = vehicle.StationId.Value
+        };
     }
 
     public static IEnumerable<StationData> ToData(this IEnumerable<Station> stations)
@@ -46,9 +52,10 @@ public static class MappingExtensions
             Customer = new BookingCustomerData
             {
                 Id = booking.Customer.Id.Value,
+                Salutation = booking.Customer.Name.Salutation.Value,
                 FirstName = booking.Customer.Name.FirstName.Value,
                 LastName = booking.Customer.Name.LastName.Value,
-                Email = booking.Customer.Email.Value,
+                BirthDate = booking.Customer.BirthDate.Value,
             },
             StartDate = booking.Period.Start.ToDateTime(TimeOnly.MinValue),
             EndDate = booking.Period.End.ToDateTime(TimeOnly.MinValue),
@@ -67,6 +74,7 @@ public static class MappingExtensions
             FirstName = customer.Name.FirstName.Value,
             LastName = customer.Name.LastName.Value,
             BirthDate = customer.BirthDate.Value.ToDateTime(TimeOnly.MinValue),
+            Email = customer.EMail.Value,
             Street = customer.Address.Street.Value,
             HouseNumber = customer.Address.HouseNumber.Value,
             Zip = customer.Address.ZipCode.Value,

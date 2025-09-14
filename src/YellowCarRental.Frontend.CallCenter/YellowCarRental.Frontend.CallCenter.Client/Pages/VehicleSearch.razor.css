@@ -1,0 +1,8 @@
+tr .item-button{
+    visibility: hidden;
+}
+
+tr:hover .item-button
+{
+    visibility: visible;
+}

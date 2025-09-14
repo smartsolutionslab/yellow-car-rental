@@ -8,14 +8,15 @@ public class BookingCommandHandlers(IBookings bookings, IVehicles vehicles, ISta
     IQueryCommandHandler<ListAllBookingsQueryCommand, SearchBookingsQueryResult>,
     IQueryCommandHandler<SearchBookingsQueryCommand, SearchBookingsQueryResult>,
     IQueryCommandHandler<CheckBookingAvailabilityQueryCommand, SearchBookingsQueryResult>,
+    IQueryCommandHandler<ShowBookingByCustomerQueryCommand, SearchBookingsQueryResult>,
     ICommandHandler<BookVehicleCommand, BookingIdentifier>,
     ICommandHandler<CancelBookingCommand, BookingIdentifier>
 {
     public async Task<SearchBookingsQueryResult> HandleQueryAsync(SearchBookingsQueryCommand command)
     {
-        var (period, stationId, customerId) = command;
+        var (period, searchTerm, stationId, customerId) = command;
 
-        var foundBookings = await bookings.With(period, stationId, customerId);
+        var foundBookings = await bookings.With(period, searchTerm, stationId, customerId);
         var relatedVehicles = await RelatedVehicles(foundBookings);
         
         return new SearchBookingsQueryResult([..foundBookings.ToData(relatedVehicles)]);
@@ -34,22 +35,22 @@ public class BookingCommandHandlers(IBookings bookings, IVehicles vehicles, ISta
         var(vehicleId, customerData, pickupStationId, returnStationId, period) = command;
         
         _ = await vehicles.FindById(vehicleId)
-                      ?? throw new Exception("Vehicle not found");
+                      ?? throw new ApplicationException("Vehicle not found");
         
         var pickupStation = await stations.FindById(pickupStationId)
-                            ?? throw new Exception("Pickup station not found");
+                            ?? throw new ApplicationException("Pickup station not found");
 
         var returnStation = await stations.FindById(returnStationId)
-                            ?? throw new Exception("Return station not found");
+                            ?? throw new ApplicationException("Return station not found");
 
         if (!pickupStation.HasVehicleAvailable(vehicleId))
         {
-            throw new Exception("This Vehicle is not available at the selected pickup station");
+            throw new ApplicationException("This Vehicle is not available at the selected pickup station");
         }
 
         if (period.Start >= period.End)
         {
-            throw new Exception("Invalid period");
+            throw new ApplicationException("Invalid period");
         }
         
         //TODO: add checks for vehicle availability, customer validity, station validity etc.
@@ -76,6 +77,17 @@ public class BookingCommandHandlers(IBookings bookings, IVehicles vehicles, ISta
 
         return booking.Id;
     }
+    
+    public async Task<SearchBookingsQueryResult> HandleQueryAsync(ShowBookingByCustomerQueryCommand command)
+    {
+        var customerId = command.CustomerId;
+
+        //TODO: repo is here reused.
+        var foundBookings = await bookings.With(null, null,null, customerId);
+        var relatedVehicles = await RelatedVehicles(foundBookings);
+
+        return new(foundBookings.ToData(relatedVehicles).ToList());
+    }
 
     public async Task<SearchBookingsQueryResult> HandleQueryAsync(CheckBookingAvailabilityQueryCommand command)
     {
@@ -87,7 +99,7 @@ public class BookingCommandHandlers(IBookings bookings, IVehicles vehicles, ISta
         return new(foundBookings.ToData(relatedVehicles).ToList());
     }
 
-    private async Task<Dictionary<VehicleIdentifier, Vehicle>> RelatedVehicles(IList<Booking> bookingsList)
+    private async Task<Dictionary<VehicleIdentifier, Vehicle>> RelatedVehicles(IEnumerable<Booking> bookingsList)
     {
         var usedVehicleIds = bookingsList.Select(booking => booking.VehicleId).Distinct().ToList();
         var relatedVehicles = (await vehicles.FindAll(usedVehicleIds)).ToDictionary(vehicle => vehicle.Id);
@@ -97,7 +109,7 @@ public class BookingCommandHandlers(IBookings bookings, IVehicles vehicles, ISta
     public async Task<BookingIdentifier> HandleAsync(CancelBookingCommand command)
     {
         var bookingId = command.BookingId;
-        var booking = await bookings.FindById(bookingId) ?? throw new Exception("Booking not found");
+        var booking = await bookings.FindById(bookingId) ?? throw new ApplicationException("Booking not found");
         
         booking.Cancel();
         

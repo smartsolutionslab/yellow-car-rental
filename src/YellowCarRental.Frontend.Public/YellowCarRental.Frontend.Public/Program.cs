@@ -16,7 +16,7 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddOutputCache();
 
-builder.Services.AddApiClient();
+builder.Services.AddApiClient(builder.Configuration);
 
 var app = builder.Build();
 

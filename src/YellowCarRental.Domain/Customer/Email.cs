@@ -1,3 +1,3 @@
 ﻿namespace SmartSolutionsLab.YellowCarRental.Domain;
 
-public sealed record Email(string Value) : IValueObject;
+public sealed record EMail(string Value) : IValueObject;

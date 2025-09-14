@@ -1,3 +1,16 @@
-﻿@page "/"
+﻿@inject NavigationManager Nav
 
-<PageTitle>Yello Car</PageTitle>
+@page "/"
+
+<PageTitle>Yello Car Rental</PageTitle>
+
+
+@code
+{
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(TimeSpan.FromSeconds((2)));
+        
+        Nav.NavigateTo("/vehicles");
+    }
+}

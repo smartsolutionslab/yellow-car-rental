@@ -1,25 +1,33 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace SmartSolutionsLab.YellowCarRent.Frontend.ApiClient;
 
 public static class Extensions
 {
-    public static IServiceCollection AddApiClient(this IServiceCollection services)
+    public static IServiceCollection AddApiClient(this IServiceCollection services, IConfiguration? configuration)
     {
-        services.AddHttpClient<VehicleApiClient>(client => { 
-            client.BaseAddress =  new Uri("https+http://api");
+        //var baseAddress = new Uri(configuration?["ApiBaseUrl"] ?? "https+http://api");
+        var baseAddress = new Uri("http://localhost:5185"); // Workaround for dev
+
+        services.AddHttpClient<VehicleApiClient>(client =>
+        {
+            client.BaseAddress = baseAddress;
         });
         
-        services.AddHttpClient<StationApiClient>(client => { 
-            client.BaseAddress =  new Uri("https+http://api");
+        services.AddHttpClient<StationApiClient>(client =>
+        {
+            client.BaseAddress = baseAddress;
         });
         
-        services.AddHttpClient<BookingApiClient>(client => { 
-            client.BaseAddress =  new Uri("https+http://api");
+        services.AddHttpClient<BookingApiClient>(client =>
+        {
+            client.BaseAddress = baseAddress;
         });
         
-        services.AddHttpClient<CustomerApiClient>(client => { 
-            client.BaseAddress =  new Uri("https+http://api");
+        services.AddHttpClient<CustomerApiClient>(client =>
+        {
+            client.BaseAddress = baseAddress;
         });
 
         return services;

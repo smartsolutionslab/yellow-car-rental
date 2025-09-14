@@ -1,12 +1,22 @@
-﻿namespace SmartSolutionsLab.YellowCarRental.Domain;
+﻿using System.Xml.Linq;
+
+namespace SmartSolutionsLab.YellowCarRental.Domain;
 
 public interface IVehicles : IRepository
 {
-    Task<IList<Vehicle>> With(
+    Task<IReadOnlyList<Vehicle>> WhichAreAvailable(
         DateRange period,
         StationIdentifier? stationId = null,
         VehicleCategory? category = null);
     
     Task<Vehicle> FindById(VehicleIdentifier vehicleId);
-    Task<IList<Vehicle>> FindAll(IEnumerable<VehicleIdentifier> requestedVehicleIds);
+    
+    Task<IReadOnlyCollection<Vehicle>> ByStationId(StationIdentifier stationId);
+    Task<IReadOnlyList<Vehicle>> FindAll(IEnumerable<VehicleIdentifier> requestedVehicleIds);
+    
+    void Update(Vehicle vehicle);
+    Task<IReadOnlyList<Vehicle>> WhichAreSimilar(
+        DateRange period, 
+        StationIdentifier? stationId, 
+        VehicleCategory? category);
 }
