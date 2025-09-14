@@ -104,6 +104,9 @@ public static class Extensions
         // See https://aka.ms/dotnet/aspire/healthchecks for details before enabling these endpoints in non-development environments.
         if (app.Environment.IsDevelopment())
         {
+            
+            Console.Write("I was here at Health Checks");
+            
             // All health checks must pass for app to be considered ready to accept traffic after starting
             app.MapHealthChecks("/health");
 

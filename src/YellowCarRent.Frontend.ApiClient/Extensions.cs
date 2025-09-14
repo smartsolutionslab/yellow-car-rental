@@ -1,32 +1,27 @@
-﻿using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace SmartSolutionsLab.YellowCarRent.Frontend.ApiClient;
 
 public static class Extensions
 {
-    public static WebAssemblyHostBuilder AddApiClient(this WebAssemblyHostBuilder builder)
+    public static IServiceCollection AddApiClient(this IServiceCollection services)
     {
-        builder.Services.AddHttpClient<VehicleApiClient>(client => { 
-            client.BaseAddress =  new Uri("https+http://yellowcarrental-api");
+        services.AddHttpClient<VehicleApiClient>(client => { 
+            client.BaseAddress =  new Uri("https+http://api");
         });
-        builder.Services.AddScoped<VehicleApiClient>();
         
-        builder.Services.AddHttpClient<StationApiClient>(client => { 
-            client.BaseAddress =  new Uri("https+http://yellowcarrental-api");
+        services.AddHttpClient<StationApiClient>(client => { 
+            client.BaseAddress =  new Uri("https+http://api");
         });
-        builder.Services.AddScoped<StationApiClient>();
         
-        builder.Services.AddHttpClient<BookingApiClient>(client => { 
-            client.BaseAddress =  new Uri("https+http://yellowcarrental-api");
+        services.AddHttpClient<BookingApiClient>(client => { 
+            client.BaseAddress =  new Uri("https+http://api");
         });
-        builder.Services.AddScoped<BookingApiClient>();
         
-        builder.Services.AddHttpClient<CustomerApiClient>(client => { 
-            client.BaseAddress =  new Uri("https+http://yellowcarrental-api");
+        services.AddHttpClient<CustomerApiClient>(client => { 
+            client.BaseAddress =  new Uri("https+http://api");
         });
-        builder.Services.AddScoped<CustomerApiClient>();
 
-        return builder;
+        return services;
     }
 }

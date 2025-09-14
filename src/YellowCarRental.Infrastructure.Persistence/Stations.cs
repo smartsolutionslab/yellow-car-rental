@@ -15,7 +15,7 @@ public static class StationExtensions
 public class Stations : IStations
 {
     public static readonly Station Berlin = Station.From(
-        StationIdentifier.Of("f9a3c9e-2b91-4c61-9f58-8dfe5a9a3b7c"),
+        StationIdentifier.Of("d8f4e7c2-3b1a-4e56-9d8f-2a7c1b3e9d4a"),
         StationName.From("Berlin"))
         .Assign(Vehicles.Bmw320DBlau)
         .Assign(Vehicles.Bmw118IWeiss)
@@ -24,7 +24,7 @@ public class Stations : IStations
         .Assign(Vehicles.MercedesGlaSilber);
 
     public static readonly Station Muenchen = Station.From(
-        StationIdentifier.Of("a2d7b8e1-5f3c-4a9b-b2cd-1e8f6d2c7a34"),
+        StationIdentifier.Of("a6b7c8d9-e1f2-4a3b-8c7d-9e0f1a2b3c4d"),
         StationName.From("München"))
         .Assign(Vehicles.Bmw320DRot)
         .Assign(Vehicles.Bmw118IBlau)
@@ -33,7 +33,7 @@ public class Stations : IStations
         .Assign(Vehicles.MercedesGlaRot);
     
     public static readonly Station Hamburg = Station.From(
-        StationIdentifier.Of("6c1f2a44-0e2d-4760-8b7a-3c9d1a5f0e21"), 
+        StationIdentifier.Of("5f6e7d8c-9b0a-4c3d-8e7f-6a5b4c3d2e1f"), 
         StationName.From("Hamburg"))
         .Assign(Vehicles.Bmw320DSchwarz)
         .Assign(Vehicles.Bmw118ISilber)
