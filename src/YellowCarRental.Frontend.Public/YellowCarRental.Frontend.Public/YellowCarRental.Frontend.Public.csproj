@@ -8,6 +8,7 @@
 
 
     <ItemGroup>
+        <ProjectReference Include="..\..\YellowCarRental.ServiceDefaults\YellowCarRental.ServiceDefaults.csproj" />
         <ProjectReference Include="..\YellowCarRental.Frontend.Public.Client\YellowCarRental.Frontend.Public.Client.csproj"/>
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server"/>
     </ItemGroup>

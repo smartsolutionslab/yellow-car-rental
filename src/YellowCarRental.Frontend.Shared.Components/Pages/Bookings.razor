@@ -1,0 +1,95 @@
+﻿@page "/bookings"
+@using SmartSolutionsLab.YellowCarRent.Frontend.ApiClient
+@using SmartSolutionsLab.YellowCarRental.Application.Contracts.Booking
+@using SmartSolutionsLab.YellowCarRental.Application.Contracts.Station
+@inject BookingApiClient BookingApi
+@inject StationApiClient StationApi
+@inject NavigationManager Nav
+
+<MudPaper Class="p-6 max-w-4xl mx-auto" Elevation="4">
+    <MudText Typo="Typo.h5" Class="mb-4">📖 Meine Buchungen</MudText>
+
+    @if (_bookings == null)
+    {
+        <MudProgressCircular Indeterminate="true" Color="Color.Primary" />
+    }
+    else if (!_bookings.Any())
+    {
+        <MudText>Keine Buchungen vorhanden.</MudText>
+    }
+    else
+    {
+        <MudTable Items="_bookings" Hover="true">
+            <HeaderContent>
+                <MudTh>Zeitraum</MudTh>
+                <MudTh>Fahrzeug</MudTh>
+                <MudTh>Station</MudTh>
+                <MudTh>Preis</MudTh>
+                <MudTh>Status</MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd>@($"{context.StartDate:dd.MM.yyyy} - {context.EndDate:dd.MM.yyyy}")</MudTd>
+                <MudTd>@context.VehicleName</MudTd>
+                <MudTd>@ResolveStationName(context.PickupStationId) → @ResolveStationName(context.ReturnStationId)</MudTd>
+                <MudTd>@($"{context.TotalPrice} €")</MudTd>
+                <MudTd>
+                    @if (context.Status == "Active")
+                    {
+                        <MudChip T="String" Color="Color.Success">Aktiv</MudChip>
+                    }
+                    else
+                    {
+                        <MudChip T="String" Color="Color.Error">Storniert</MudChip>
+                    }
+                </MudTd>
+                <MudTd>
+                    @if (context.Status == "Active")
+                    {
+                        <MudButton Variant="Variant.Outlined" Color="Color.Error" OnClick="() => CancelBooking(context.Id)">
+                            ❌ Stornieren
+                        </MudButton>
+                    }
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    }
+</MudPaper>
+
+@code {
+    private List<BookingData>? _bookings;
+    private List<StationData> _stations = [];
+
+    protected override async Task OnInitializedAsync()
+    {
+        // TODO: CustomerId aus Login holen
+        var customerId = Guid.Parse("11111111-1111-1111-1111-111111111111");
+        var bookingResult = await BookingApi.GetBookingsForCustomerAsync(customerId);
+        _bookings = bookingResult.Bookings.ToList();
+        
+        var stationResult = await StationApi.ListStationsAsync();
+        _stations = stationResult.Stations.ToList();
+    }
+
+    private async Task CancelBooking(Guid bookingId)
+    {
+        try
+        {
+            await BookingApi.CancelBookingAsync(bookingId);
+
+            var booking = _bookings?.FirstOrDefault(b => b.Id == bookingId);
+            if (booking is not null) booking.Status = "Cancelled";
+            StateHasChanged();
+        }
+        catch
+        {
+            throw new Exception("Error on cancelling booking"); ;
+        }
+    }
+    
+    public string ResolveStationName(Guid stationId)
+    {
+        var station = _stations.Find(s => s.Id == stationId);
+        return station?.Name ?? "Unbekannte Station";
+    }
+}

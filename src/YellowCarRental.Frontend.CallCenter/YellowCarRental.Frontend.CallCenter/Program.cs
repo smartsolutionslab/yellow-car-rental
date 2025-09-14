@@ -1,8 +1,10 @@
 using MudBlazor.Services;
-using SmartSolutionsLab.YellowCarRental.Frontend.CallCenter.Client.Pages;
+
 using SmartSolutionsLab.YellowCarRental.Frontend.CallCenter.Components;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.AddServiceDefaults();
 
 // Add MudBlazor services
 builder.Services.AddMudServices();

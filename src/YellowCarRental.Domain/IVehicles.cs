@@ -8,4 +8,5 @@ public interface IVehicles : IRepository
         VehicleCategory? category = null);
     
     Task<Vehicle> FindById(VehicleIdentifier vehicleId);
+    Task<IList<Vehicle>> FindAll(IEnumerable<VehicleIdentifier> requestedVehicleIds);
 }

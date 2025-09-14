@@ -19,4 +19,16 @@ public class BookingApiClient(HttpClient http)
         return await http.GetFromJsonAsync<SearchBookingsQueryResult>("/api/bookings") ??
                SearchBookingsQueryResult.Empty;
     }
+    
+    public async Task<SearchBookingsQueryResult> GetBookingsForCustomerAsync(Guid customerId)
+    {
+        return await http.GetFromJsonAsync<SearchBookingsQueryResult>($"api/booking/customer/{customerId}") //TODO : check route
+               ?? SearchBookingsQueryResult.Empty;
+    }
+    
+    public async Task CancelBookingAsync(Guid bookingId)
+    {
+        var response = await http.PostAsync($"api/booking/{bookingId}/cancel", null);
+        response.EnsureSuccessStatusCode();
+    }
 }

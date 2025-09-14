@@ -4,7 +4,8 @@ using SmartSolutionsLab.YellowCarRental.Domain;
 
 namespace SmartSolutionsLab.YellowCarRental.Application;
 
-public class StationsCommandHandlers(IStations stations) : IQueryCommandHandler<ListAllStationsQueryCommand, ListStationsQueryResult>
+public class StationsCommandHandlers(IStations stations) :
+    IQueryCommandHandler<ListAllStationsQueryCommand, ListStationsQueryResult>
 {
     public async Task<ListStationsQueryResult> HandleQueryAsync(ListAllStationsQueryCommand queryCommand)
     {

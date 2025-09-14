@@ -9,6 +9,7 @@ public class Booking : IRootEntity
     public StationIdentifier ReturnStationId { get; private set; } = null!;
     public DateRange Period { get; private set; } = null!;
     public Money TotalPrice { get; private set; } = null!;
+    public BookingStatus Status { get; private set; }
 
     private Booking()
     {
@@ -31,6 +32,7 @@ public class Booking : IRootEntity
 
         var days = period.TotalDaysInclusive();
         TotalPrice = Money.Of(days * pricePerDay.Amount, pricePerDay.Currency);
+        Status = BookingStatus.Active;
     }
 
     public static Booking From(
@@ -42,5 +44,12 @@ public class Booking : IRootEntity
         Money pricePerDay)
     {
         return new Booking(vehicleId, customer, period, pickupStationId, returnStationId, pricePerDay);
+    }
+    
+    public void Cancel()
+    {
+        if (Status == BookingStatus.Cancelled) throw new InvalidOperationException("Booking is already cancelled.");
+
+        Status = BookingStatus.Cancelled;
     }
 }

@@ -12,7 +12,7 @@
         <MudSelect @bind-Value="_customer.Salutation" Label="Anrede">
             @foreach(var salutation in Salutation.All )
             {
-                <MudSelectItem T Value="@salutation">@salutation</MudSelectItem>
+                <MudSelectItem T="Salutation" Value="@salutation">@salutation</MudSelectItem>
             }
         </MudSelect>
 

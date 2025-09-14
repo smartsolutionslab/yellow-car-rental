@@ -9,13 +9,13 @@ public class CustomerCommandHandlers(ICustomers customers) :
     IQueryCommandHandler<ShowAllCustomersCommand, ListCustomersQueryResult>,
     IQueryCommandHandler<ShowCustomerCommand, CustomerData>
 {
-    
-
     public async Task<CustomerIdentifier> HandleAsync(RegisterCustomerCommand command)
     {
-        var (salutation, firstName, lastName, birthDate, address) = command;
-        var customer = Customer.From(CustomerName.From(salutation, firstName, lastName), birthDate, address);
+        var (name, birthDate, address) = command;
+        
+        var customer = Customer.From(name, birthDate, address);
         await customers.Add(customer);
+        
         return customer.Id;
     }
 

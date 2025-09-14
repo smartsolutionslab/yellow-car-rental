@@ -4,6 +4,8 @@ using SmartSolutionsLab.YellowCarRental.Frontend.Public.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.AddServiceDefaults();
+
 // Add MudBlazor services
 builder.Services.AddMudServices();
 

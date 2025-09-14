@@ -15,7 +15,6 @@ public static class MappingExtensions
             Id = vehicle.Id.Value,
             Name = vehicle.Name.Value,
             Category = vehicle.Category.Key,
-            Seats = vehicle.Seats,
             Fuel = vehicle.Fuel.Key,
             Transmission = vehicle.Transmission.Key,
             PricePerDay = vehicle.PricePerDay.Amount,
@@ -30,17 +29,18 @@ public static class MappingExtensions
             Name = station.Name.Value
         });
     }
-    public static IEnumerable<BookingData> ToData(this IEnumerable<Booking> bookings)
+    public static IEnumerable<BookingData> ToData(this IEnumerable<Booking> bookings, IDictionary<VehicleIdentifier, Vehicle> relatedVehicles)
     {
-        return bookings.Select(booking => booking.ToData());
+        return bookings.Select(booking => booking.ToData( relatedVehicles[booking.VehicleId]));
     }
     
-    public static BookingData ToData(this Booking booking)
+    public static BookingData ToData(this Booking booking, Vehicle vehicle)
     {
         return new BookingData
         {
             Id = booking.Id.Value,
             VehicleId = booking.VehicleId.Value,
+            VehicleName = booking.VehicleId == vehicle.Id ? vehicle.Name.Value : "Unknown Vehicle",
             PickupStationId = booking.PickupStationId.Value,
             ReturnStationId = booking.ReturnStationId.Value,
             Customer = new BookingCustomerData
@@ -54,6 +54,7 @@ public static class MappingExtensions
             EndDate = booking.Period.End.ToDateTime(TimeOnly.MinValue),
             TotalPrice = booking.TotalPrice.Amount,
             TotalPriceCurrency = booking.TotalPrice.Currency,
+            Status = Enum.GetName(booking.Status) ?? string.Empty
         };
     }
 

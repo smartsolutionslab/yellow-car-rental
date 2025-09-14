@@ -9,11 +9,24 @@ using SmartSolutionsLab.YellowCarRental.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.AddServiceDefaults();
+builder.Services.AddProblemDetails();
+
 builder.RegisterAllApplicationCommandsAndHandlers();
 builder.AddPersistence();
-builder.AddServiceDefaults();
+
+// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+builder.Services.AddOpenApi();
 
 var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+app.UseExceptionHandler();
+
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi();
+}
 
 app.MapGet("/api/vehicles/search",
     (DateTime start, DateTime end, Guid? stationId, string? category,
@@ -40,15 +53,30 @@ app.MapGet("/api/bookings/search",
             StationIdentifier.IfPossibleOf(stationId),
             CustomerIdentifier.IfPossibleOf(customerId))));
 
-app.MapPost("/api/bookings", async (BookVehicleCommand command, ICommandHandler<BookVehicleCommand, BookingIdentifier> handler, IBookings bookings) =>
+app.MapPost("/api/bookings", async (BookVehicleCommand command, ICommandHandler<BookVehicleCommand, BookingIdentifier> handler, IBookings bookings, IVehicles vehicles) =>
 {
     var bookingId = await handler.HandleAsync(command);
-    var booking = (await bookings.FindById(bookingId)).ToData();
+    
+    var assignedVehicle = await vehicles.FindById(command.VehicleId);
+    var booking = (await bookings.FindById(bookingId)).ToData(assignedVehicle);
     
     return Results.Created($"/api/bookings/{bookingId}", booking);
 });
 
-app.MapGet("/api/customers/{id}", async (Guid id, IQueryCommandHandler<ShowCustomerCommand, CustomerData> handler, ICustomers customers) =>
+app.MapPost("/api/bookings/{id}/cancel", async (Guid id, ICommandHandler<CancelBookingCommand, BookingIdentifier> handler) =>
+{
+    try
+    {
+        await handler.HandleAsync(new CancelBookingCommand(BookingIdentifier.Of(id)));
+        Results.Ok("Booking cancelled");
+    }
+    catch (Exception)
+    {
+        Results.BadRequest();
+    }
+});
+
+app.MapGet("/api/customers/{id}", async (Guid id, IQueryCommandHandler<ShowCustomerCommand, CustomerData> handler) =>
 {
     try
     {
@@ -69,7 +97,7 @@ app.MapPost("/api/customers", async (RegisterCustomerCommand command, ICommandHa
     return Results.Created($"/api/customers/{customer.Id}", customer);
 });
 
-
+app.MapDefaultEndpoints();
 
 app.Run();
 

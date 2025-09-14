@@ -7,17 +7,24 @@ public static class Extensions
 {
     public static WebAssemblyHostBuilder AddApiClient(this WebAssemblyHostBuilder builder)
     {
-        var baseUrl = builder.Configuration["ApiBaseUrl"];
-        
-        if (string.IsNullOrWhiteSpace(baseUrl))
-        {
-            baseUrl = "https://localhost:5001"; // fallback for local dev
-        }
-
-        builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(baseUrl) });
+        builder.Services.AddHttpClient<VehicleApiClient>(client => { 
+            client.BaseAddress =  new Uri("https+http://yellowcarrental-api");
+        });
         builder.Services.AddScoped<VehicleApiClient>();
+        
+        builder.Services.AddHttpClient<StationApiClient>(client => { 
+            client.BaseAddress =  new Uri("https+http://yellowcarrental-api");
+        });
         builder.Services.AddScoped<StationApiClient>();
+        
+        builder.Services.AddHttpClient<BookingApiClient>(client => { 
+            client.BaseAddress =  new Uri("https+http://yellowcarrental-api");
+        });
         builder.Services.AddScoped<BookingApiClient>();
+        
+        builder.Services.AddHttpClient<CustomerApiClient>(client => { 
+            client.BaseAddress =  new Uri("https+http://yellowcarrental-api");
+        });
         builder.Services.AddScoped<CustomerApiClient>();
 
         return builder;

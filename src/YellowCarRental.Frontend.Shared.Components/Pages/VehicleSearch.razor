@@ -47,7 +47,6 @@
         <HeaderContent>
             <MudTh>Fahrzeug</MudTh>
             <MudTh>Kategorie</MudTh>
-            <MudTh>Sitze</MudTh>
             <MudTh>Kraftstoff</MudTh>
             <MudTh>Getriebe</MudTh>
             <MudTh>Preis/Tag</MudTh>
@@ -55,7 +54,6 @@
         <RowTemplate>
             <MudTd DataLabel="Fahrzeug">@context.Name</MudTd>
             <MudTd DataLabel="Kategorie">@context.Category</MudTd>
-            <MudTd DataLabel="Sitze">@context.Seats</MudTd>
             <MudTd DataLabel="Kraftstoff">@context.Fuel</MudTd>
             <MudTd DataLabel="Getriebe">@context.Transmission</MudTd>
             <MudTd DataLabel="Preis/Tag">@($"{context.PricePerDay:C}")</MudTd>

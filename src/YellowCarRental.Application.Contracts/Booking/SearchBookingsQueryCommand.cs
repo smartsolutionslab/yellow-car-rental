@@ -8,4 +8,3 @@ public record SearchBookingsQueryCommand(
     CustomerIdentifier? CustomerId) : IQueryCommand;
 
 public record ListAllBookingsQueryCommand() : IQueryCommand;
-    
