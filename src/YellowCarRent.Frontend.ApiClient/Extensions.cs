@@ -16,6 +16,9 @@ public static class Extensions
 
         builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(baseUrl) });
         builder.Services.AddScoped<VehicleApiClient>();
+        builder.Services.AddScoped<StationApiClient>();
+        builder.Services.AddScoped<BookingApiClient>();
+        builder.Services.AddScoped<CustomerApiClient>();
 
         return builder;
     }

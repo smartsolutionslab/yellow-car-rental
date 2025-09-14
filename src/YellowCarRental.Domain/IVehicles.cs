@@ -2,8 +2,10 @@
 
 public interface IVehicles : IRepository
 {
-    Task<IEnumerable<Vehicle>> With(
+    Task<IList<Vehicle>> With(
         DateRange period,
         StationIdentifier? stationId = null,
-        string? category = null);
+        VehicleCategory? category = null);
+    
+    Task<Vehicle> FindById(VehicleIdentifier vehicleId);
 }

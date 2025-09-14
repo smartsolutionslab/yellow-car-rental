@@ -1,10 +1,12 @@
 ﻿@page "/vehicles"
 
 @using SmartSolutionsLab.YellowCarRent.Frontend.ApiClient
-@using SmartSolutionsLab.YellowCarRental.Api.Contracts
+@using SmartSolutionsLab.YellowCarRental.Application.Contracts.Station
+@using SmartSolutionsLab.YellowCarRental.Application.Contracts.Vehicle
 @using SmartSolutionsLab.YellowCarRental.Domain
 @using DateRange = MudBlazor.DateRange
 @inject VehicleApiClient VehicleApi
+@inject StationApiClient StationApi
 
 <PageTitle>Fahrzeugsuche</PageTitle>
 
@@ -15,7 +17,7 @@
         </MudItem>
 
         <MudItem xs="12" sm="4">
-            <MudSelect T="string" Label="Station" @bind-Value="_selectedStation">
+            <MudSelect T="StationData" Label="Station" @bind-Value="_selectedStation">
                 @foreach (var station in _stations)
                 {
                     <MudSelectItem Value="@station">@station</MudSelectItem>
@@ -24,7 +26,7 @@
         </MudItem>
 
         <MudItem xs="12" sm="4">
-            <MudSelect T="string" Label="Kategorie" @bind-Value="_selectedCategory">
+            <MudSelect T="VehicleCategory" Label="Kategorie" @bind-Value="_selectedCategory">
                 @foreach (var category in VehicleCategory.All)
                 {
                     <MudSelectItem Value="category">@category.Name</MudSelectItem>                    
@@ -49,7 +51,6 @@
             <MudTh>Kraftstoff</MudTh>
             <MudTh>Getriebe</MudTh>
             <MudTh>Preis/Tag</MudTh>
-            <MudTh>Gesamtpreis</MudTh>
         </HeaderContent>
         <RowTemplate>
             <MudTd DataLabel="Fahrzeug">@context.Name</MudTd>
@@ -58,19 +59,27 @@
             <MudTd DataLabel="Kraftstoff">@context.Fuel</MudTd>
             <MudTd DataLabel="Getriebe">@context.Transmission</MudTd>
             <MudTd DataLabel="Preis/Tag">@($"{context.PricePerDay:C}")</MudTd>
-            <MudTd DataLabel="Gesamtpreis">@($"{context.TotalPrice:C}")</MudTd>
+
         </RowTemplate>
     </MudTable>
 }
 
 @code {
     private DateRange? _selectedRange;
-    private string? _selectedStation;
-    private string? _selectedCategory;
-    private List<string> _stations = new() { "Berlin Hbf", "München Zentrum", "Hamburg Hafen" };
+    private StationData? _selectedStation;
+    private VehicleCategory? _selectedCategory;
+    private List<StationData> _stations = [];
 
     //TODO: refactor back to VihicleVm private List<VehicleVm>? _vehicles;
-    private List<VehicleData>? _vehicles;
+    private List<VehicleData>? _vehicles = [];
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        
+        var stationResponse = await StationApi.ListStationsAsync();
+        _stations = stationResponse.Stations.ToList();
+    }
 
     private async Task SearchVehicles()
     {
@@ -79,8 +88,8 @@
         var response = await VehicleApi.SearchVehiclesAsync(
             _selectedRange.Start.GetValueOrDefault(DateTime.Today),
             _selectedRange.End.GetValueOrDefault(DateTime.Today.AddDays(7)),
-            _selectedStation,
-            _selectedCategory
+            _selectedStation?.Id,
+            _selectedCategory?.Key
         );
 
         _vehicles = response.Vehicles;

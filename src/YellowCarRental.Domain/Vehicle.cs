@@ -22,11 +22,11 @@ public class Vehicle : IRootEntity
         return new Vehicle(name, category, seats, fuel, transmission, pricePerDay);
     }
 
-    public VehicleIdentifier Id { get; private set; }
-    public VehicleName Name { get; private set; }
-    public VehicleCategory Category { get; private set; }
+    public VehicleIdentifier Id { get; private set; } = null!;
+    public VehicleName Name { get; private set; } = null!;
+    public VehicleCategory Category { get; private set; } = null!;
     public int Seats { get; private set; }
-    public FuelType Fuel { get; private set; }
-    public TransmissionType Transmission { get; private set; }
-    public Money PricePerDay { get; private set; }
+    public FuelType Fuel { get; private set; } = null!;
+    public TransmissionType Transmission { get; private set; } = null!;
+    public Money PricePerDay { get; private set; } = null!;
 }

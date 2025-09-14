@@ -11,7 +11,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\YellowCarRental.Api.Contracts\YellowCarRental.Api.Contracts.csproj" />
+      <ProjectReference Include="..\YellowCarRental.Application.Contracts\YellowCarRental.Application.Contracts.csproj" />
       <ProjectReference Include="..\YellowCarRental.Application\YellowCarRental.Application.csproj" />
       <ProjectReference Include="..\YellowCarRental.Domain\YellowCarRental.Domain.csproj" />
       <ProjectReference Include="..\YellowCarRental.Infrastructure.Persistence\YellowCarRental.Infrastructure.Persistence.csproj" />

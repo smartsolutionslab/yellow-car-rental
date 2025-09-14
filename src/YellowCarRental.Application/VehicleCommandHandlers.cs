@@ -1,4 +1,5 @@
-﻿using SmartSolutionsLab.YellowCarRental.Api.Contracts;
+﻿using SmartSolutionsLab.YellowCarRental.Application.Contracts;
+using SmartSolutionsLab.YellowCarRental.Application.Contracts.Vehicle;
 using SmartSolutionsLab.YellowCarRental.Domain;
 
 namespace SmartSolutionsLab.YellowCarRental.Application;

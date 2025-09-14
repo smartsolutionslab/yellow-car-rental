@@ -1,0 +1,120 @@
+﻿@page "/book/{vehicleId:guid}"
+@using System.CodeDom
+@using SmartSolutionsLab.YellowCarRent.Frontend.ApiClient
+@using SmartSolutionsLab.YellowCarRental.Application.Contracts.Booking
+@using SmartSolutionsLab.YellowCarRental.Application.Contracts.Customer
+@using SmartSolutionsLab.YellowCarRental.Application.Contracts.Station
+@using SmartSolutionsLab.YellowCarRental.Domain
+@using DateRange = SmartSolutionsLab.YellowCarRental.Domain.DateRange
+@inject BookingApiClient BookingApi
+@inject CustomerApiClient CustomerApi
+@inject StationApiClient StationApi
+@inject NavigationManager Nav
+
+<PageTitle>Buchung</PageTitle>
+
+<MudPaper Class="p-4" Elevation="2">
+    <MudText Typo="Typo.h6">Fahrzeug buchen</MudText>
+
+    <MudDateRangePicker Label="Zeitraum" @bind-DateRange="_range" />
+    
+    <MudSelect T="StationData" Label="Abhol-Station" @bind-Value="_pickupStation">
+        @if (_stations is not null)
+        {
+            @foreach (var s in _stations)
+            {
+                <MudSelectItem Value="s">@($"{s.Name} ({s.Name})")</MudSelectItem>
+            }
+        }
+    </MudSelect>
+
+    <MudSelect T="StationData" Label="Rückgabe-Station" @bind-Value="_returnStation">
+        @if (_stations is not null)
+        {
+            @foreach (var s in _stations)
+            {
+                <MudSelectItem Value="s">@($"{s.Name} ({s.Name})")</MudSelectItem>
+            }
+        }
+    </MudSelect>
+    
+    
+    <MudTextField @bind-Value="_customerId" Label="Kunden-ID" Immediate="true"
+                  OnBlur="LoadCustomerData" />
+
+    @if (_customer is not null)
+    {
+        <MudTextField @bind-Value="_customer.FirstName" Label="Vorname" Disabled="true" />
+        <MudTextField @bind-Value="_customer.LastName" Label="Nachname" Disabled="true" />
+        <MudTextField @bind-Value="_customer.Street" Label="Straße" Disabled="true" />
+        <MudTextField @bind-Value="_customer.City" Label="Ort" Disabled="true" />
+    }
+    
+
+    <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-4"OnClick="CreateBooking">
+        📅 Buchen
+    </MudButton>
+
+    @if (!string.IsNullOrEmpty(_message))
+    {
+        <MudAlert Severity="Severity.Info">@_message</MudAlert>
+    }
+</MudPaper>
+
+@code {
+    [Parameter] public Guid VehicleId { get; set; }
+    private MudBlazor.DateRange? _range;
+    
+    private List<StationData>? _stations;
+    private StationData? _pickupStation;
+    private StationData? _returnStation;
+    private string _customerId = string.Empty;
+    private CustomerData? _customer;
+    private string _message = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _stations = (await StationApi.ListStationsAsync()).Stations.ToList();
+    }
+    
+    private async Task LoadCustomerData()
+    {
+        if (Guid.TryParse(_customerId, out var id))
+        {
+            _customer = await CustomerApi.FindCustomerAsync(id);
+        }
+    }
+
+    private async Task CreateBooking()
+    {
+        if (_range is null || string.IsNullOrWhiteSpace(_customerId))
+        {
+            _message = "Bitte alle Felder ausfüllen.";
+            return;
+        }
+
+        try
+        {
+            var booking = await BookingApi.BookVehicle(new BookVehicleCommand(
+                VehicleIdentifier.Of(VehicleId),
+                _customer is not null ? MapCustomerData(_customer) : throw new InvalidOperationException("Kundendaten nicht geladen"),
+                    _pickupStation is not null ? StationIdentifier.Of(_pickupStation.Id) : throw new InvalidOperationException("Station nicht gewählt"),
+                    _returnStation is not null ? StationIdentifier.Of(_returnStation.Id) : throw new InvalidOperationException("Station nicht gewählt"),
+                DateRange.From(_range.Start!.Value, _range.End!.Value)));
+            
+            _message = $"✅ Buchung erfolgreich! ID: {booking.Id}, Preis: {booking.TotalPrice:C}";
+        }
+        catch (Exception)
+        {
+            _message = "❌ Buchung fehlgeschlagen.";
+        }
+    }
+
+    private BookingCustomer MapCustomerData(CustomerData customer)
+    {
+        return new BookingCustomer(
+            CustomerIdentifier.Of(customer.Id),
+            CustomerName.From(customer.Salutation, customer.FirstName, customer.FirstName),
+            new Email("no set")); //TODO: add real email
+    }
+}

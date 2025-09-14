@@ -42,7 +42,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YellowCarRental.Api", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YellowCarRent.Frontend.ApiClient", "src\YellowCarRent.Frontend.ApiClient\YellowCarRent.Frontend.ApiClient.csproj", "{2878F418-557C-4DB2-95CA-D5DE4673B372}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YellowCarRental.Api.Contracts", "src\YellowCarRental.Api.Contracts\YellowCarRental.Api.Contracts.csproj", "{EF8F164C-1FA9-4EA6-8AAF-6410F56F79D5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YellowCarRental.Application.Contracts", "src\YellowCarRental.Application.Contracts\YellowCarRental.Application.Contracts.csproj", "{EF8F164C-1FA9-4EA6-8AAF-6410F56F79D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -119,6 +119,6 @@ Global
 		{52DD5366-3274-4ADC-917C-4317F39759AD} = {F955168F-0978-4D09-B374-B48CB3C63A26}
 		{598540AB-D3CA-41AF-A156-A3F4B4E1B7D1} = {582E5179-31B1-4013-B1C1-F352FE0C9093}
 		{2878F418-557C-4DB2-95CA-D5DE4673B372} = {582E5179-31B1-4013-B1C1-F352FE0C9093}
-		{EF8F164C-1FA9-4EA6-8AAF-6410F56F79D5} = {F955168F-0978-4D09-B374-B48CB3C63A26}
+		{EF8F164C-1FA9-4EA6-8AAF-6410F56F79D5} = {2A925D11-506A-4CBB-BF56-A2C99D9FA388}
 	EndGlobalSection
 EndGlobal

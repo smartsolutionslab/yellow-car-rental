@@ -2,29 +2,45 @@
 
 public class Booking : IRootEntity
 {
-    public BookingIdentifier Id { get; private set; }
-    public VehicleIdentifier VehicleId { get; private set; }
-    public Guid CustomerId { get; private set; }
-    public DateRange Period { get; private set; }
-    public Money TotalPrice { get; private set; }
+    public BookingIdentifier Id { get; private set; } = null!;
+    public VehicleIdentifier VehicleId { get; private set; } = null!;
+    public BookingCustomer Customer { get; private set; } = null!;
+    public StationIdentifier PickupStationId { get; private set; } = null!;
+    public StationIdentifier ReturnStationId { get; private set; } = null!;
+    public DateRange Period { get; private set; } = null!;
+    public Money TotalPrice { get; private set; } = null!;
 
     private Booking()
     {
     } // EF Core
 
-    private Booking(VehicleIdentifier vehicleId, Guid customerId, DateRange period, Money pricePerDay)
+    private Booking(
+        VehicleIdentifier vehicleId, 
+        BookingCustomer customer, 
+        DateRange period, 
+        StationIdentifier pickupStationId, 
+        StationIdentifier returnStationId, 
+        Money pricePerDay)
     {
         Id = BookingIdentifier.New();
         VehicleId = vehicleId;
-        CustomerId = customerId;
+        Customer = customer;
         Period = period;
+        PickupStationId = pickupStationId;
+        ReturnStationId = returnStationId;
 
         var days = period.TotalDaysInclusive();
         TotalPrice = Money.Of(days * pricePerDay.Amount, pricePerDay.Currency);
     }
 
-    public static Booking From(VehicleIdentifier vehicleId, Guid customerId, DateRange period, Money pricePerDay)
+    public static Booking From(
+        VehicleIdentifier vehicleId, 
+        BookingCustomer customer, 
+        DateRange period, 
+        StationIdentifier pickupStationId, 
+        StationIdentifier returnStationId, 
+        Money pricePerDay)
     {
-        return new Booking(vehicleId, customerId, period, pricePerDay);
+        return new Booking(vehicleId, customer, period, pickupStationId, returnStationId, pricePerDay);
     }
 }

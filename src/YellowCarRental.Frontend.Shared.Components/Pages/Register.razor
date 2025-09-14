@@ -1,0 +1,62 @@
+﻿@page "/register"
+@using SmartSolutionsLab.YellowCarRent.Frontend.ApiClient
+@using SmartSolutionsLab.YellowCarRental.Application.Contracts.Customer
+@using SmartSolutionsLab.YellowCarRental.Domain
+@inject CustomerApiClient CustomerApi
+@inject NavigationManager Nav
+
+<MudPaper Class="p-6 max-w-xl mx-auto" Elevation="4">
+    <MudText Typo="Typo.h5" Class="mb-4">📝 Registrierung</MudText>
+
+    <MudForm @ref="_form" Model="_customer">
+        <MudSelect @bind-Value="_customer.Salutation" Label="Anrede">
+            @foreach(var salutation in Salutation.All )
+            {
+                <MudSelectItem T Value="@salutation">@salutation</MudSelectItem>
+            }
+        </MudSelect>
+
+        <MudTextField @bind-Value="_customer.FirstName" Label="Vorname" Required="true" />
+        <MudTextField @bind-Value="_customer.LastName" Label="Nachname" Required="true" />
+
+        <MudDatePicker @bind-Date="_customer.BirthDate" Label="Geburtsdatum" />
+
+        <MudTextField @bind-Value="_customer.Street" Label="Straße" Required="true" />
+        <MudTextField @bind-Value="_customer.HouseNumber" Label="Hausnummer" Required="true" />
+        <MudTextField @bind-Value="_customer.Zip" Label="PLZ" Required="true" />
+        <MudTextField @bind-Value="_customer.City" Label="Ort" Required="true" />
+
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-4" OnClick="RegisterCustomer">
+            ➕ Registrieren
+        </MudButton>
+    </MudForm>
+
+    @if (!string.IsNullOrEmpty(_message))
+    {
+        <MudText Color="Color.Success" Class="mt-3">@_message</MudText>
+    }
+</MudPaper>
+
+@code {
+    private MudForm? _form;
+    private CustomerVm _customer = new();
+    private string _message = "";
+
+    private async Task RegisterCustomer()
+    {
+        if (_customer is null)
+        {
+            throw new InvalidOperationException("Customer is not set!");
+        }
+
+        var created = await CustomerApi.RegisterCustomerAsync(new RegisterCustomerCommand(
+            CustomerName.From(_customer.Salutation.Value, _customer.FirstName, _customer.LastName),
+            BirthDate.From(DateOnly.FromDateTime(_customer.BirthDate.GetValueOrDefault(DateTime.MinValue))),
+            CustomerAddress.From(_customer.Street, _customer.HouseNumber, _customer.Zip, _customer.City)));
+        
+        _message = $"✅ Kunde erfolgreich angelegt! ID: {created.Id}";
+        // Weiterleitung nach Registrierung, z. B. zur Buchung
+        // Nav.NavigateTo("/booking");
+    
+    }
+}

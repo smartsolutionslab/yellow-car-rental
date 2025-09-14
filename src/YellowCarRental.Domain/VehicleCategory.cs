@@ -20,6 +20,11 @@ public sealed record VehicleCategory(string Key, string Name) : IValueObject
     
     public static VehicleCategory FromKey(string key)
     {
+        ArgumentException.ThrowIfNullOrWhiteSpace(key, nameof(key));
+        
         return All.Single(c => c.Key == key);
     }
+
+    public static VehicleCategory? IfPossibleFromKey(string? key) =>
+        !String.IsNullOrWhiteSpace(key) ? FromKey(key) : null;
 }
