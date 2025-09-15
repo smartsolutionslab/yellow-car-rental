@@ -6,8 +6,6 @@ public sealed record Salutation(string Value) : IValueObject
     public static readonly Salutation Missus = new("Frau");
     public static readonly Salutation Divers = new("Divers");
     
-    private Salutation() : this(string.Empty) // for EF
-    { }
     
     public static IEnumerable<Salutation> All
     {

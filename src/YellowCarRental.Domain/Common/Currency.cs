@@ -2,10 +2,6 @@
 
 public sealed record Currency(string Code, string Symbol, int DecimalPlaces = 2) : IValueObject
 {
-    private Currency() : this(string.Empty,string.Empty, 2) // for EF
-    {}
-    
-    
     public static readonly Currency EUR = new("EUR", "€");
     public static readonly Currency USD = new("USD", "$");
     public static readonly Currency GBP = new("GBP", "£");

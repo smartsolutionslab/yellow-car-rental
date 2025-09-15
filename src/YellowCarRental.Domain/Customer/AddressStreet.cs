@@ -2,9 +2,6 @@
 
 public sealed record AddressStreet(string Value) : IValueObject
 {
-    private AddressStreet(): this(string.Empty) // for EF
-    { }
-    
     public static AddressStreet From(string value)
     {
         if (string.IsNullOrWhiteSpace(value))

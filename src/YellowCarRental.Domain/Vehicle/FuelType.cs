@@ -2,9 +2,6 @@
 
 public sealed record FuelType(string Key, string Name)  : IValueObject
 {
-    private FuelType() : this(String.Empty,string.Empty) // For EF
-    {}
-    
     public static readonly FuelType Petrol = new("P", "Petrol");
     public static readonly FuelType Diesel = new("D", "Diesel");
     public static readonly FuelType Electric = new("E", "Electric");

@@ -4,12 +4,12 @@ public class Booking : IRootEntity
 {
     public BookingIdentifier Id { get; private set; } = null!;
     public VehicleIdentifier VehicleId { get; private set; } = null!;
-    public BookingCustomer Customer { get; private set; } = null!; // For EF
+    public BookingCustomer Customer { get; private set; } = null!;
     public StationIdentifier PickupStationId { get; private set; } = null!;
     public StationIdentifier ReturnStationId { get; private set; } = null!;
     public DateRange Period { get; private set; } = null!;
     public Money TotalPrice { get; private set; } = null!;
-    public BookingStatus Status { get; private set; } = BookingStatus.Active;
+    public BookingStatus Status { get; private set; }
 
     private Booking()
     {

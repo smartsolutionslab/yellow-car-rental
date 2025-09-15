@@ -2,9 +2,6 @@
 
 public sealed record CustomerName(Salutation Salutation, FirstName FirstName, LastName LastName) : IValueObject
 {
-    private CustomerName() : this(null!, null!, null!) // for EF
-    { }
-    
     public static CustomerName From(Salutation salutation, FirstName firstName, LastName lastName) =>
         new(salutation, firstName, lastName);
     

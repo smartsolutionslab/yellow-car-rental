@@ -52,16 +52,16 @@ public static class MappingExtensions
             Customer = new BookingCustomerData
             {
                 Id = booking.Customer.Id.Value,
-                Salutation = booking.Customer.Name?.Salutation?.Value ?? Salutation.Mister.Value,
-                FirstName = booking.Customer.Name?.FirstName?.Value ?? "Sample Firstname",
-                LastName = booking.Customer.Name?.LastName?.Value ?? "Sample Lastname",
+                Salutation = booking.Customer.Name.Salutation.Value,
+                FirstName = booking.Customer.Name.FirstName.Value,
+                LastName = booking.Customer.Name.LastName.Value,
                 BirthDate = booking.Customer.BirthDate.Value,
             },
             StartDate = booking.Period.Start.ToDateTime(TimeOnly.MinValue),
             EndDate = booking.Period.End.ToDateTime(TimeOnly.MinValue),
             TotalPrice = booking.TotalPrice.Amount,
             TotalPriceCurrency = booking.TotalPrice.Currency,
-            Status = Enum.GetName(booking.Status) ?? string.Empty,
+            Status = Enum.GetName(booking.Status) ?? string.Empty
         };
     }
 

@@ -1,28 +1,13 @@
-﻿using System.Text.Json;
+﻿namespace SmartSolutionsLab.YellowCarRental.Domain;
 
-namespace SmartSolutionsLab.YellowCarRental.Domain;
-
-public sealed record BookingCustomer(
-    CustomerIdentifier Id, 
-    CustomerName Name, 
-    BirthDate BirthDate) : IValueObject
+public sealed record BookingCustomer(CustomerIdentifier Id, CustomerName Name, BirthDate BirthDate) : IValueObject
 {
-    private BookingCustomer() // for EF
-        : this(null!, null!, null!)
-    {
-    }
-    
     public static BookingCustomer From(Customer customer)
     {
         return new BookingCustomer(customer.Id, customer.Name, customer.BirthDate);
     }
     
-    public static BookingCustomer From(
-        Guid id, 
-        string salutation, 
-        string firstName, 
-        string lastName, 
-        DateOnly birthDate)
+    public static BookingCustomer From(Guid id, string salutation, string firstName, string lastName, DateOnly birthDate)
     {
         return new BookingCustomer(
             CustomerIdentifier.Of(id), 

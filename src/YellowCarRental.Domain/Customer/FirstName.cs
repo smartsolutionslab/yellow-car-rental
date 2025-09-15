@@ -2,9 +2,6 @@
 
 public sealed record FirstName(string Value) : IValueObject
 {
-    private FirstName() : this(string.Empty) // for EF
-    { }
-    
     public static FirstName From(string value)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(value, nameof(value));
