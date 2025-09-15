@@ -4,25 +4,18 @@ using SmartSolutionsLab.YellowCarRental.Domain;
 
 namespace SmartSolutionsLab.YellowCarRental.Infrastructure.Persistence;
 
-public class Customers : ICustomers
+public class Customers(RentalDbContext dbContext) : ICustomers
 {
-    private readonly RentalDbContext _dbContext;
-
-
-    public  Customers(RentalDbContext dbContext)
-    {
-        _dbContext = dbContext;
-    }
-    
-    
     public async Task<IReadOnlyList<Customer>> All()
     {
-        return await _dbContext.Customers.AsNoTracking().ToListAsync();
+        return await dbContext.Customers.AsNoTracking().ToListAsync();
     }
 
     public async Task<Customer> FindById(CustomerIdentifier customerId)
     {
-        var foundCustomer = _dbContext.Customers.AsNoTracking().FirstOrDefault(c => c.Id == customerId);
+        var foundCustomer = dbContext.Customers
+            .AsNoTracking()
+            .FirstOrDefault(c => c.Id.Value == customerId.Value);
 
         await Task.CompletedTask;
         
@@ -31,13 +24,13 @@ public class Customers : ICustomers
 
     public async Task Add(Customer customer)
     {
-        _dbContext.Customers.Add(customer);
-        await _dbContext.SaveChangesAsync();
+        dbContext.Customers.Add(customer);
+        await dbContext.SaveChangesAsync();
     }
 
     public async Task<IReadOnlyCollection<Customer>> WithSearchTerm(SearchTerm searchTerm)
     {
-        var matchingCustomers = await _dbContext.Customers.AsNoTracking()
+        var matchingCustomers = await dbContext.Customers.AsNoTracking()
             .Where(c => EF.Functions.Like(c.Name.FirstName.Value, searchTerm.Value) || 
                         EF.Functions.Like(c.Name.LastName.Value,searchTerm.Value) ||
                         EF.Functions.Like(c.Address.Street.Value, searchTerm.Value) ||

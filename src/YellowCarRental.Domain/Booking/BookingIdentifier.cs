@@ -2,6 +2,9 @@
 
 public record BookingIdentifier(Guid Value) : IValueObject
 {
+    private BookingIdentifier() : this(Guid.Empty) // for EF
+    { }
+    
     public static BookingIdentifier Of(Guid id)
     {
         if(id == Guid.Empty)

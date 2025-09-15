@@ -12,7 +12,7 @@ public interface ICurrentUserProfile
 
 public class CurrentUserProfile(CustomerApiClient customerApi) : ICurrentUserProfile
 {
-    private CustomerData _customerData;
+    private CustomerData? _customerData;
     private bool _isInitialized = false;
     
     public async Task InitializeAsync()

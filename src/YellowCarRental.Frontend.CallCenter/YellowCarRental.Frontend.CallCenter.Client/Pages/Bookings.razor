@@ -64,7 +64,7 @@
                     <MudChip T="String" Color="Color.Error">Storniert</MudChip>
                 }
                 </MudTd>
-            <MudTd DataLabel="Preis" Align="Right">@($"{context.TotalPrice:C}")</MudTd>
+            <MudTd DataLabel="Preis">@($"{context.TotalPrice:C}")</MudTd>
             <MudTh>
                 @if (context.Status == "Active")
                 {

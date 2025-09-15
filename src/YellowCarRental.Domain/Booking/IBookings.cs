@@ -12,7 +12,7 @@ public interface IBookings : IRepository
         StationIdentifier? stationId, 
         CustomerIdentifier? customerId);
     
-    Task<IReadOnlyList<Booking>> ForVehicle(VehicleIdentifier vehicleId, DateRange period = null);
+    Task<IReadOnlyList<Booking>> ForVehicle(VehicleIdentifier vehicleId, DateRange period);
     
     Task<Booking> FindById(BookingIdentifier bookingId);
     

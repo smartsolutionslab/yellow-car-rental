@@ -17,7 +17,10 @@ public class Bookings(RentalDbContext dbContext) : IBookings
         StationIdentifier? stationId, 
         CustomerIdentifier? customerId)
     {
-        var query = dbContext.Bookings.AsQueryable();
+        IQueryable<Booking> query = dbContext.Bookings
+            .AsQueryable()
+            .Include(b => b.Customer)
+            .Include(b => b.Customer.Name);
 
         if (period is not null)
         {
@@ -26,12 +29,12 @@ public class Bookings(RentalDbContext dbContext) : IBookings
 
         if (stationId is not null)
         {
-            query = query.Where(booking => booking.PickupStationId == stationId || booking.ReturnStationId == stationId);
+            query = query.Where(booking => booking.PickupStationId.Value == stationId.Value || booking.ReturnStationId.Value == stationId.Value);
         }
         
         if (customerId is not null)
         {
-            query = query.Where(booking => booking.Customer.Id == customerId);
+            query = query.Where(booking => booking.Customer.Id.Value == customerId.Value);
         }
         
         if (searchTerm is not null)
@@ -51,7 +54,7 @@ public class Bookings(RentalDbContext dbContext) : IBookings
     {
         await Task.CompletedTask;
         
-        var query = dbContext.Bookings.Where(booking => booking.VehicleId == vehicleId)
+        var query = dbContext.Bookings.Where(booking => booking.VehicleId.Value == vehicleId.Value)
             .Where(booking => booking.Period.Start <= period.End && booking.Period.End >= period.Start);
 
         var foundBookings = await query.AsNoTracking().ToListAsync();
@@ -61,7 +64,7 @@ public class Bookings(RentalDbContext dbContext) : IBookings
 
     public async Task<Booking> FindById(BookingIdentifier bookingId)
     {
-        var foundBooking = await dbContext.Bookings.SingleOrDefaultAsync(booking => booking.Id == bookingId);
+        var foundBooking = await dbContext.Bookings.SingleOrDefaultAsync(booking => booking.Id.Value == bookingId.Value);
         
         return foundBooking ?? throw new PersistenceException($"Booking with ID {bookingId} not found");
     }

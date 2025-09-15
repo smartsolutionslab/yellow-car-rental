@@ -2,6 +2,9 @@
 
 public class BookingData
 {
+    public BookingData() // For Linq
+    { }
+
     public required Guid Id { get; set; }
     public required Guid VehicleId { get; set; }
     public required string VehicleName { get; set; }

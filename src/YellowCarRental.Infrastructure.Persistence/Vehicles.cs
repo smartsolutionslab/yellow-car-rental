@@ -1,8 +1,23 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Linq.Expressions;
+using System.Runtime.InteropServices.JavaScript;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using SmartSolutionsLab.YellowCarRental.Domain;
 
 namespace SmartSolutionsLab.YellowCarRental.Infrastructure.Persistence;
+
+public static class DateRangeExpressions
+{
+    /// <summary>
+    /// SQL-taugliche Expression für Overlap-Prüfung
+    /// </summary>
+    public static Expression<Func<Booking, bool>> Overlaps(DateOnly start, DateOnly end)
+    {
+        return booking => booking.Period.Start < end && start < booking.Period.End;
+    }
+}
+
+
 
 public class Vehicles(RentalDbContext dbContext) : IVehicles
 {
@@ -15,24 +30,36 @@ public class Vehicles(RentalDbContext dbContext) : IVehicles
 
         if (category is not null)
         {
-            query = query.Where(v => v.Category == category);
+            query = query.Where(v => v.Category.Key == category.Key);
         }
 
         if (stationId is not null)
         {
-            query = query.Where(vehicle => vehicle.StationId == stationId);
+            query = query.Where(vehicle => vehicle.StationId.Value == stationId.Value);
         }
+/*
+        var bookingsByVehicleIdQuery = (VehicleIdentifier vehicleId) => dbContext.Bookings
+            .Where(b => b.VehicleId.Value == vehicleId.Value)
+            .Where(b => b.Status != BookingStatus.Cancelled);
+*/
+        var possibleVehicleIds = query.Select(vehicle => vehicle.Id.Value).Distinct();
 
-        query = query.Where(vehicle => dbContext.Bookings
-            .Where(b => b.VehicleId.Value == b.VehicleId.Value)
-            .Where(b => b.Period.Overlaps(period)).Any() == false);
+        var possibleRelatedOverlappingBookingsByPeriodQuery = dbContext.Bookings
+            .AsNoTracking()
+            .Where(b => b.Status != BookingStatus.Cancelled)
+            .Where(DateRangeExpressions.Overlaps(period.Start, period.End))
+            .Where(b => possibleVehicleIds.Contains(b.VehicleId.Value));
+
+        query = query.Where(vehicle =>
+            possibleRelatedOverlappingBookingsByPeriodQuery.All(b => b.VehicleId.Value != vehicle.Id.Value));
+            
 
         return await query.AsNoTracking().ToListAsync();
     }
 
     public async Task<Vehicle> FindById(VehicleIdentifier vehicleId)
     {
-        var foundVehicle = await dbContext.Vehicles.SingleOrDefaultAsync(v => v.Id == vehicleId);
+        var foundVehicle = await dbContext.Vehicles.SingleOrDefaultAsync(v => v.Id.Value == vehicleId.Value);
         
 
         return foundVehicle ?? throw new PersistenceException($"Vehicle with ID {vehicleId} not found");
@@ -41,7 +68,7 @@ public class Vehicles(RentalDbContext dbContext) : IVehicles
     public async Task<IReadOnlyCollection<Vehicle>> ByStationId(StationIdentifier stationId)
     {
         var foundVehicles = await dbContext.Vehicles
-            .Where(v => v.StationId == stationId)
+            .Where(v => v.StationId.Value == stationId.Value)
             .ToListAsync();
         
         return foundVehicles;
@@ -49,7 +76,9 @@ public class Vehicles(RentalDbContext dbContext) : IVehicles
 
     public async Task<IReadOnlyList<Vehicle>> FindAll(IEnumerable<VehicleIdentifier> requestedVehicleIds)
     {
-        return await dbContext.Vehicles.Where(vehicle => requestedVehicleIds.Contains(vehicle.Id)).ToListAsync();
+        var vehicleIds = requestedVehicleIds.Select(id => id.Value).ToList();
+        
+        return await dbContext.Vehicles.Where(vehicle => vehicleIds.Contains(vehicle.Id.Value)).ToListAsync();
     }
 
     public void Update(Vehicle vehicle)
@@ -66,12 +95,12 @@ public class Vehicles(RentalDbContext dbContext) : IVehicles
 
         if (normalSearch.Any())
         {
-            var normalIds = normalSearch.Select(v => v.Id);
+            var normalIds = normalSearch.Select(v => v.Id.Value);
             
             if (stationId is not null)
             {
                 var firstTryResult = await WhichAreAvailable(period, null, category);
-                var similarResult = firstTryResult.Where(vehicle => !normalIds.Contains(vehicle.Id)).ToList();
+                var similarResult = firstTryResult.Where(vehicle => !normalIds.Contains(vehicle.Id.Value)).ToList();
 
                 if (similarResult.Any())
                 {
@@ -82,7 +111,7 @@ public class Vehicles(RentalDbContext dbContext) : IVehicles
             if (category is not null)
             {
                 var secondTryResult = await WhichAreAvailable(period, stationId, null);
-                var similarResult = secondTryResult.Where(vehicle => !normalIds.Contains(vehicle.Id)).ToList();
+                var similarResult = secondTryResult.Where(vehicle => !normalIds.Contains(vehicle.Id.Value)).ToList();
                 if (similarResult.Any())
                 {
                     return new List<Vehicle>(similarResult);
@@ -96,7 +125,7 @@ public class Vehicles(RentalDbContext dbContext) : IVehicles
                     period.End.AddDays(period.TotalDaysInclusive())),
                 stationId, category);
             
-            var lastResult = lastTryResult.Where(vehicle => !normalIds.Contains(vehicle.Id)).ToList();
+            var lastResult = lastTryResult.Where(vehicle => !normalIds.Contains(vehicle.Id.Value)).ToList();
 
             return new List<Vehicle>(lastResult);
         }

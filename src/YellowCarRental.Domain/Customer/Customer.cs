@@ -2,10 +2,10 @@
 
 public class Customer: IRootEntity
 {
-    public CustomerIdentifier Id { get; private set; }
+    public CustomerIdentifier Id { get; private set; } = null!;
     
     public CustomerName Name { get; private set; } = null!;
-    public BirthDate BirthDate { get; private set; }
+    public BirthDate BirthDate { get; private set; } = null!;
     public CustomerAddress Address { get; private set; } = null!;
     public EMail EMail { get; private set; } = null!;
 
@@ -30,7 +30,11 @@ public class Customer: IRootEntity
         Id = id;
     }
 
-    public static Customer From(CustomerName name, BirthDate birthDate, CustomerAddress address, EMail eMail)
+    public static Customer From(
+        CustomerName name, 
+        BirthDate birthDate, 
+        CustomerAddress address, 
+        EMail eMail)
     {
         return new Customer(name, birthDate, address, eMail);
     }

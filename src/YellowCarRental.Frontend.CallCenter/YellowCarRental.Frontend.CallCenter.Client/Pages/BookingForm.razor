@@ -49,7 +49,7 @@
         </MudExpansionPanel>
 
         <MudExpansionPanel Text="Kunde" Expanded="true">
-            <MudRadioGroup T="CustomerMode"  @bind-SelectedOption="CustomerMode">
+            <MudRadioGroup T="CustomerMode"  @bind-Value="CustomerMode">
                 <MudRadio T="CustomerMode" Value="CustomerMode.Existing" Label="Bestehenden Kunden suchen"/>
                 <MudRadio T="CustomerMode" Value="CustomerMode.New" Label="Neuen Kunden anlegen"/>
             </MudRadioGroup>

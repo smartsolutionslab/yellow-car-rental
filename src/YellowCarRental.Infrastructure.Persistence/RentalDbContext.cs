@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 using SmartSolutionsLab.YellowCarRental.Domain;
 
@@ -12,163 +13,205 @@ public class RentalDbContext(DbContextOptions<RentalDbContext> options) : DbCont
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseAsyncSeeding(async (dbContext, options, cancellationToken) =>
+        optionsBuilder.UseSeeding((dbContext, seed) =>
         {
+
             var customers = Seed.CustomerTestData.GetAll(50);
             // for demo purposes only
-            var demoCustomerId =CustomerIdentifier.Of("8f5d9c4a-2b3e-4f1a-9d6e-7c8b2a1f3e45");
-        
+            var demoCustomerId = CustomerIdentifier.Of("8f5d9c4a-2b3e-4f1a-9d6e-7c8b2a1f3e45");
+
             customers.First().OverrideId(demoCustomerId);
 
             var vehicles = VehicleInitData.AllVehicles.ToList();
             var stations = StationsInitData.AllStations.ToList();
-            
-            await dbContext.AddRangeAsync(customers, cancellationToken);
-            await dbContext.AddRangeAsync(vehicles, cancellationToken);
-            await dbContext.AddRangeAsync(stations, cancellationToken);
-            await dbContext.AddRangeAsync(BookingSeedData.GetAll(
-                                                  customers,
-                                                  stations,
-                                                  vehicles.Select(v => v.Id).ToList(),
-                                                  250).ToList(),
-                cancellationToken);
+
+            dbContext.AddRange(customers);
+            dbContext.AddRange(vehicles);
+            dbContext.AddRange(stations);
+            dbContext.AddRange(BookingSeedData.GetAll(
+                customers,
+                stations,
+                vehicles.Select(v => v.Id).ToList(),
+                250).ToList());
+
+            dbContext.SaveChanges();
         });
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Vehicle>(e =>
+        modelBuilder.Entity<Vehicle>(vehicle =>
         {
-            e.HasKey(v => v.Id);
-            e.Property(v => v.Id)
+            vehicle.HasKey(v => v.Id);
+            vehicle.Property<VehicleIdentifier>(v => v.Id)
                 .IsRequired()
                 .HasConversion(id => id.Value, id => VehicleIdentifier.Of(id));
 
-            e.Property(v => v.Name)
+            vehicle.Property<VehicleName>(v => v.Name)
                 .IsRequired()
                 .HasConversion(name => name.Value, name => new VehicleName(name));
-            e.Property(v => v.Category)
+            vehicle.Property<VehicleCategory>(v => v.Category)
                 .IsRequired()
                 .HasMaxLength(5)
                 .HasConversion(c => c.Key, c => VehicleCategory.FromKey(c));
-            e.Property(v => v.Fuel)
+            vehicle.Property<FuelType>(v => v.Fuel)
                 .IsRequired()
                 .HasMaxLength(5)
                 .HasConversion(f => f.Key, f => FuelType.FromKey(f));
-            e.Property(v => v.Transmission)
+            vehicle.Property<TransmissionType>(v => v.Transmission)
                 .IsRequired()
                 .HasMaxLength(5)
                 .HasConversion(t => t.Key, t => TransmissionType.FromKey(t));
-            e.ComplexProperty(v => v.PricePerDay, p =>
+            vehicle.OwnsOne<Money>(v => v.PricePerDay, p =>
             {
-                p.Property(p => p.Amount).IsRequired();
-                p.Property(p => p.Currency)
+                p.Property<Decimal>(p => p.Amount)
+                    .IsRequired();
+                p.Property<String>(p => p.Currency)
                     .IsRequired()
                     .HasMaxLength(5);
             });
-            e.Property(v => v.StationId)
+            vehicle.Property<StationIdentifier>(v => v.StationId)
                 .IsRequired()
                 .HasConversion(id => id.Value, id => StationIdentifier.Of(id));
 
         });
 
-        modelBuilder.Entity<Booking>(e =>
+        modelBuilder.Entity<Booking>(booking =>
         {
-            e.HasKey(b => b.Id);
-            e.Property(b => b.Id)
+            booking.HasKey(b => b.Id);
+            booking.Property<BookingIdentifier>(b => b.Id)
                 .IsRequired()
                 .HasConversion(id => id.Value, id => BookingIdentifier.Of(id));
-
-            e.ComplexProperty(b => b.Customer, c =>
+            booking.OwnsOne<BookingCustomer>(b => b.Customer, bookingCustomer =>
             {
-                c.Property(c => c.Id)
+                bookingCustomer.Property<CustomerIdentifier>(c => c.Id)
                     .IsRequired()
                     .HasConversion(id => id.Value, id => CustomerIdentifier.Of(id));
-                c.ComplexProperty(c => c.Name, n =>
+                bookingCustomer.OwnsOne<CustomerName>(c => c.Name, n =>
                 {
-                    n.Property(n => n.Salutation)
+                    n.Property<Salutation>(n => n.Salutation)
                         .IsRequired()
                         .HasMaxLength(10)
                         .HasConversion(s => s.Value, s => Salutation.From(s));
-                    n.Property(n => n.FirstName)
+                    n.Property<FirstName>(n => n.FirstName)
                         .IsRequired()
                         .HasConversion(name => name.Value, name => FirstName.From(name));
-                    n.Property(n => n.LastName)
+                    n.Property<LastName>(n => n.LastName)
                         .IsRequired()
                         .HasConversion(name => name.Value, name => LastName.From(name));
                 });
-                c.Property(c => c.BirthDate)
+                bookingCustomer.Property<BirthDate>(c => c.BirthDate)
+                    .IsRequired()
                     .HasConversion(b => b.Value, b => BirthDate.From(b));
             });
-            e.Property(b => b.PickupStationId)
+            booking.Property<VehicleIdentifier>(b => b.VehicleId)
+                .IsRequired()
+                .HasConversion(id => id.Value, id => VehicleIdentifier.Of(id));
+            booking.Property<StationIdentifier>(b => b.PickupStationId)
                 .IsRequired()
                 .HasConversion(id => id.Value, id => StationIdentifier.Of(id));
-            e.Property(b => b.ReturnStationId)
+            booking.Property<StationIdentifier>(b => b.ReturnStationId)
                 .IsRequired()
                 .HasConversion(id => id.Value, id => StationIdentifier.Of(id));
-            e.ComplexProperty(b => b.Period)
-                .IsRequired();
-            e.ComplexProperty(b => b.TotalPrice, p =>
+            booking.OwnsOne<DateRange>(b => b.Period, p =>
             {
-                p.Property(p => p.Amount).IsRequired();
+                p.Property(p => p.Start).IsRequired();
+                p.Property(p => p.End).IsRequired();
+            });
+
+            booking.OwnsOne<Money>(b => b.TotalPrice, p =>
+            {
+                p.Property(p => p.Amount)
+                    .IsRequired();
                 p.Property(p => p.Currency)
                     .IsRequired()
                     .HasMaxLength(5);
+                
             });
-            e.Property(b => b.Status).IsRequired();
+            booking.Property<BookingStatus>(b => b.Status).IsRequired();
         });
 
-        modelBuilder.Entity<Station>(e =>
+        modelBuilder.Entity<Station>(station =>
         {
-            e.HasKey(s => s.Id);
-            e.Property(s => s.Id)
+            station.HasKey(s => s.Id);
+            station.Property(s => s.Id)
                 .IsRequired()
                 .HasConversion(id => id.Value, id => StationIdentifier.Of(id));
-            e.Property(s => s.Name)
+            station.Property<StationName>(s => s.Name)
                 .IsRequired()
                 .HasConversion(name => name.Value, name => StationName.From(name));
-        });
-
-        modelBuilder.Entity<Customer>(e =>
-        {
-            e.HasKey(c => c.Id);
-            e.Property(c => c.Id)
-                .IsRequired()
-                .HasConversion(id => id.Value, id => CustomerIdentifier.Of(id));
-            e.ComplexProperty(c => c.Name, n =>
+            station.OwnsOne<StationAddress>(s => s.Address, a =>
             {
-                n.Property(n => n.Salutation)
-                    .IsRequired()
-                    .HasMaxLength(10)
-                    .HasConversion(s => s.Value, s => Salutation.From(s));
-                n.Property(n => n.FirstName)
-                    .IsRequired()
-                    .HasConversion(name => name.Value, name => FirstName.From(name));
-                n.Property(n => n.LastName)
-                    .IsRequired()
-                    .HasConversion(name => name.Value, name => LastName.From(name));
-            });
-            e.Property(c => c.BirthDate)
-                .HasConversion(b => b.Value, b => BirthDate.From(b));
-            e.ComplexProperty(c => c.Address, a =>
-            {
-                a.Property(a => a.Street)
+                a.Property<AddressStreet>(a => a.Street)
                     .IsRequired()
                     .HasConversion(s => s.Value, s => AddressStreet.From(s));
-                a.Property(a => a.HouseNumber)
+                /*a.Property(a => a.HouseNumber)
                     .IsRequired()
-                    .HasConversion(h => h.Value, h => HouseNumber.From(h));
-                a.Property(a => a.ZipCode)
+                    .HasConversion(h => h.Value, h => HouseNumber.From(h));*/
+                a.Property<ZipCode>(a => a.ZipCode)
                     .IsRequired()
                     .HasConversion(z => z.Value, z => ZipCode.From(z));
-                a.Property(a => a.City)
+                a.Property<City>(a => a.City)
                     .IsRequired()
                     .HasConversion(c => c.Value, c => City.From(c));
             });
-            e.Property(c => c.EMail)
+            
+            station.Ignore(e => e.CurrentVehicleIds);
+            station.Ignore("_vehicleAssignments");
+            /*e.OwnsMany<Station.VehicleAssignment>("_vehicleAssignments", a =>
+            {
+                a.WithOwner().HasForeignKey(a => a.StationId).HasPrincipalKey(a => a.Id);
+                a.HasKey("_id");
+                a.Property<Guid>("_id")
+                    .IsRequired();
+                a.Property(a => a.StationId)
+                    .IsRequired()
+                    .HasConversion(id => id.Value, id => StationIdentifier.Of(id));
+                a.Property(a => a.VehicleId)
+                    .HasConversion(id => id.Value, id => VehicleIdentifier.Of(id));
+                a.HasOne(a => a.VehicleId);
+
+            });*/
+        });
+
+        modelBuilder.Entity<Customer>(customer =>
+        {
+            customer.HasKey(c => c.Id);
+            customer.Property<CustomerIdentifier>(c => c.Id)
+                .IsRequired()
+                .HasConversion(id => id.Value, id => CustomerIdentifier.Of(id));
+            customer.OwnsOne<CustomerName>(c => c.Name, n =>
+            {
+                n.Property<Salutation>(n => n.Salutation)
+                    .IsRequired()
+                    .HasMaxLength(10)
+                    .HasConversion(s => s.Value, s => Salutation.From(s));
+                n.Property<FirstName>(n => n.FirstName)
+                    .IsRequired()
+                    .HasConversion(name => name.Value, name => FirstName.From(name));
+                n.Property<LastName>(n => n.LastName)
+                    .IsRequired()
+                    .HasConversion(name => name.Value, name => LastName.From(name));
+            });
+            customer.Property<BirthDate>(c => c.BirthDate)
+                .HasConversion(b => b.Value, b => BirthDate.From(b));
+            customer.OwnsOne<CustomerAddress>(c => c.Address, a =>
+            {
+                a.Property<AddressStreet>(a => a.Street)
+                    .IsRequired()
+                    .HasConversion(s => s.Value, s => AddressStreet.From(s));
+                a.Property<HouseNumber>(a => a.HouseNumber)
+                    .IsRequired()
+                    .HasConversion(h => h.Value, h => HouseNumber.From(h));
+                a.Property<ZipCode>(a => a.ZipCode)
+                    .IsRequired()
+                    .HasConversion(z => z.Value, z => ZipCode.From(z));
+                a.Property<City>(a => a.City)
+                    .IsRequired()
+                    .HasConversion(c => c.Value, c => City.From(c));
+            });
+            customer.Property<EMail>(c => c.EMail)
                 .HasConversion(e => e.Value, e => new EMail(e));
-
-
         });
     }
 }

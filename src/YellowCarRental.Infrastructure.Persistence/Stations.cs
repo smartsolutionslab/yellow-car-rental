@@ -12,29 +12,22 @@ public static class StationExtensions
     }
 }
 
-public class Stations : IStations
+public class Stations(RentalDbContext dbContext) : IStations
 {
-    private readonly RentalDbContext _dbContext;
-
-    public Stations(RentalDbContext dbContext)
-    {
-        _dbContext = dbContext;
-    }
-    
     public async Task<IList<Station>> All()
     {
-        return await _dbContext.Stations.AsNoTracking().ToListAsync();
+        return await dbContext.Stations.AsNoTracking().ToListAsync();
     }
 
     public async Task<Station> FindById(StationIdentifier id)
     {
-        var foundStation = await _dbContext.Stations.FirstOrDefaultAsync(s => s.Id == id) ?? throw new KeyNotFoundException($"Station with ID {id} not found.");
+        var foundStation = await dbContext.Stations.FirstOrDefaultAsync(s => s.Id.Value == id.Value) ?? throw new KeyNotFoundException($"Station with ID {id} not found.");
         return foundStation;
     }
 
     public async Task Update(Station station)
     {
-        _dbContext.Update(station);
-        await _dbContext.SaveChangesAsync();
+        dbContext.Update(station);
+        await dbContext.SaveChangesAsync();
     }
 }

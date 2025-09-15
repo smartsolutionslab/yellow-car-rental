@@ -2,6 +2,9 @@
 
 public class BookingCustomerData
 {
+    public BookingCustomerData() // Linq
+    {}
+    
     public required Guid Id { get; set; }
     public required string Salutation { get; set; }
     public required string FirstName { get; set; }

@@ -1,5 +1,4 @@
-﻿@page "/"
-@page "/vehicles"
+﻿@page "/vehicles"
 
 @using SmartSolutionsLab.YellowCarRent.Frontend.ApiClient
 @using SmartSolutionsLab.YellowCarRental.Application.Contracts.Station
@@ -71,7 +70,7 @@
             <MudTd DataLabel="Getriebe">@TransmissionType.FromKey(context.Transmission).Name</MudTd>
             <MudTd DataLabel="Preis/Tag">@($"{context.PricePerDay:C}")</MudTd>
             <MudTh>
-                <MudButton  Class="item-button" Color="Color.Error" Icon="@Icons.Material.Filled.Start" Href="@ResolveBookingUrl(context)">
+                <MudButton  Class="item-button" Color="Color.Error" StartIcon="@Icons.Material.Filled.Start" Href="@ResolveBookingUrl(context)">
                     Buchen
                 </MudButton>
             </MudTh>    
