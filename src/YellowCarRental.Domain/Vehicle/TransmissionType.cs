@@ -2,6 +2,9 @@
 
 public sealed record TransmissionType(string Key, string Name) : IValueObject
 {
+    private TransmissionType() : this(string.Empty, string.Empty) // For EF
+    { }
+
     public static readonly TransmissionType Manual = new("M", "Manual");
     public static readonly TransmissionType Automatic = new("A", "Automatic");
     

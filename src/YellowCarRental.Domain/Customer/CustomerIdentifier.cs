@@ -2,6 +2,8 @@
 
 public sealed record CustomerIdentifier(Guid Value) : IValueObject
 {
+    private CustomerIdentifier() : this(Guid.Empty) // for EF
+    { }
     public static CustomerIdentifier Of(Guid id)
     {
         if(id == Guid.Empty)

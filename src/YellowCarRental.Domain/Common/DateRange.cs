@@ -2,6 +2,9 @@
 
 public record DateRange(DateOnly Start, DateOnly End) : IValueObject
 {
+    private DateRange() : this(DateOnly.MinValue, DateOnly.MinValue) // for EF
+    { }
+    
     public static DateRange From(DateOnly start, DateOnly end)
     {
         if (end < start) throw new ArgumentException("End before start");

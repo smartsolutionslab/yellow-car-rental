@@ -13,7 +13,9 @@ public class Customers(RentalDbContext dbContext) : ICustomers
 
     public async Task<Customer> FindById(CustomerIdentifier customerId)
     {
-        var foundCustomer = dbContext.Customers.AsNoTracking().FirstOrDefault(c => c.Id == customerId);
+        var foundCustomer = dbContext.Customers
+            .AsNoTracking()
+            .FirstOrDefault(c => c.Id.Value == customerId.Value);
 
         await Task.CompletedTask;
         

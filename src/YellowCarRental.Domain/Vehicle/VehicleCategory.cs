@@ -2,6 +2,9 @@
 
 public sealed record VehicleCategory(string Key, string Name) : IValueObject
 {
+    private VehicleCategory() : this(string.Empty, string.Empty) // For EF
+    { }
+
     public static readonly VehicleCategory Compact = new("S", "Kleinwaen");
     public static readonly VehicleCategory Sedan = new("M", "Limousine");
     public static readonly VehicleCategory Suv = new("L", "SUV");

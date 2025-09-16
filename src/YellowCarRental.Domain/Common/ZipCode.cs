@@ -2,6 +2,9 @@
 
 public sealed record ZipCode(string Value) : IValueObject
 {
+    private ZipCode(): this(string.Empty) // for EF
+    { }
+    
     public static ZipCode From(string value)
     {
         if (string.IsNullOrWhiteSpace(value))

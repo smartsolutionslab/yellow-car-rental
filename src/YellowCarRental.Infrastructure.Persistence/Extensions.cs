@@ -12,6 +12,7 @@ public static class Extensions
         where TBuilder : IHostApplicationBuilder
     {
         builder.Services.AddDbContext<RentalDbContext>(options =>
+            //options.UseSqlite($"yellow-car-rental-db"));
             options.UseInMemoryDatabase("yellow-car-rentel-db"));
         
         builder.Services.AddScoped<ICustomers, Customers>();
@@ -23,7 +24,9 @@ public static class Extensions
 
     public static IServiceProvider UsePersistence(this IServiceProvider services, IConfiguration configuration)
     {
-        RentalDbContext dbContext = services.GetRequiredService<RentalDbContext>();
+        var scope = services.CreateScope();
+        var scopedServices = scope.ServiceProvider;
+        RentalDbContext dbContext = scopedServices.GetRequiredService<RentalDbContext>();
         dbContext.Database.EnsureCreated();
 
         return services;

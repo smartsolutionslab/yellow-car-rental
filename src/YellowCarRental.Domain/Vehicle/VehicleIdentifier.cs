@@ -2,6 +2,10 @@
 
 public record VehicleIdentifier(Guid Value) : IValueObject
 {
+
+    private VehicleIdentifier() : this(Guid.Empty) // EF Core
+    { }
+
     public static VehicleIdentifier Of(Guid id)
     {
         if(id == Guid.Empty)

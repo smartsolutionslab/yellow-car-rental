@@ -2,6 +2,9 @@
 
 public record StationIdentifier(Guid Value) : IValueObject
 {
+    private StationIdentifier() : this(Guid.Empty) // for EF
+    {}
+    
     public static StationIdentifier Of(Guid id)
     {
         if(id == Guid.Empty)

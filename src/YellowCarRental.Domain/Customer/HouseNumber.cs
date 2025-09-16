@@ -2,6 +2,8 @@
 
 public sealed record HouseNumber(string Value) : IValueObject
 {
+    private HouseNumber() : this(string.Empty) // for EF
+    { }
     public static HouseNumber From(string value)
     {
         if (string.IsNullOrWhiteSpace(value))
