@@ -40,12 +40,7 @@ internal static class BookingSeedData
 
             // Random stations (ensure sometimes different pickup/return)
             var pickupStation = stationsList[rnd.Next(stationsList.Count)];
-            var returnStation = stationsList[rnd.Next(stationsList.Count)];
-            if (i % 3 == 0 && returnStation == pickupStation)
-            {
-                // Force a different return every third booking
-                returnStation = stationsList[(stationsList.IndexOf(pickupStation) + 1) % stationsList.Count];
-            }
+            
 
             // Temporal distribution
             int startOffset = rnd.Next(-90, 90);          // days from today
@@ -62,7 +57,7 @@ internal static class BookingSeedData
                 customer,
                 period,
                 pickupStation.Id,
-                returnStation.Id,
+                pickupStation.Id,
                 pricePerDay: Money.Of(pricePerDay, "EUR") // Assume flat rate; adjust as needed
             );
             

@@ -31,10 +31,10 @@ public class Customers(RentalDbContext dbContext) : ICustomers
     public async Task<IReadOnlyCollection<Customer>> WithSearchTerm(SearchTerm searchTerm)
     {
         var matchingCustomers = await dbContext.Customers.AsNoTracking()
-            .Where(c => EF.Functions.Like(c.Name.FirstName.Value, searchTerm.Value) || 
-                        EF.Functions.Like(c.Name.LastName.Value,searchTerm.Value) ||
-                        EF.Functions.Like(c.Address.Street.Value, searchTerm.Value) ||
-                        EF.Functions.Like(c.Address.City.Value, searchTerm.Value))
+            .Where(c => c.Name.FirstName.Value.Contains(searchTerm.Value) || 
+                        c.Name.LastName.Value.Contains(searchTerm.Value) ||
+                        c.Address.Street.Value.Contains(searchTerm.Value) ||
+                        c.Address.City.Value.Contains(searchTerm.Value))
             .ToListAsync();
 
         return matchingCustomers;

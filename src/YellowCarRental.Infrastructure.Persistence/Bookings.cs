@@ -18,9 +18,8 @@ public class Bookings(RentalDbContext dbContext) : IBookings
         CustomerIdentifier? customerId)
     {
         IQueryable<Booking> query = dbContext.Bookings
-            .AsQueryable()
-            .Include(b => b.Customer)
-            .Include(b => b.Customer.Name);
+            .AsQueryable();
+          
 
         if (period is not null)
         {
@@ -39,8 +38,8 @@ public class Bookings(RentalDbContext dbContext) : IBookings
         
         if (searchTerm is not null)
         {
-            query = query.Where(booking => EF.Functions.Like(booking.Customer.Name.FirstName.Value, searchTerm.Value) ||
-                                           EF.Functions.Like(booking.Customer.Name.LastName.Value, searchTerm.Value));
+            query = query.Where(booking => booking.Customer.Name.FirstName.Value.Contains(searchTerm.Value) ||
+                                           booking.Customer.Name.LastName.Value.Contains(searchTerm.Value));
 
         }
 

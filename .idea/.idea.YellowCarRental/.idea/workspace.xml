@@ -18,48 +18,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d7d35477-cc4c-4f20-a938-b67bba0197b5" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/YellowCarRental.Infrastructure.Persistence/BookingEntityTypeConfiguration.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/YellowCarRental.Infrastructure.Persistence/CustomerEntityTypeConfiguration.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/YellowCarRental.Infrastructure.Persistence/StationEntityTypeConfiguration.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/YellowCarRental.Infrastructure.Persistence/VehicleEntityTypeConfiguration.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.YellowCarRental/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.YellowCarRental/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Api/YellowCarRental.Api.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Api/YellowCarRental.Api.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Application.Contracts/Booking/BookingCustomerData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Application.Contracts/Booking/BookingCustomerData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Application.Contracts/Booking/BookingData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Application.Contracts/Booking/BookingData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Application/CommandHandlers/MappingExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Application/CommandHandlers/MappingExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Domain/Booking/Booking.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Domain/Booking/Booking.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Domain/Booking/BookingCustomer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Domain/Booking/BookingCustomer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Domain/Booking/BookingIdentifier.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Domain/Booking/BookingIdentifier.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Domain/Common/Currency.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Domain/Common/Currency.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Domain/Common/DateRange.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Domain/Common/DateRange.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Domain/Common/Money.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Domain/Common/Money.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Domain/Common/ZipCode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Domain/Common/ZipCode.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Domain/Customer/AddressStreet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Domain/Customer/AddressStreet.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Domain/Customer/BirthDate.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Domain/Customer/BirthDate.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Domain/Customer/City.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Domain/Customer/City.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Domain/Customer/CustomerAddress.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Domain/Customer/CustomerAddress.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Domain/Customer/CustomerIdentifier.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Domain/Customer/CustomerIdentifier.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Domain/Customer/CustomerName.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Domain/Customer/CustomerName.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Domain/Customer/EMail.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Domain/Customer/EMail.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Domain/Customer/FirstName.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Domain/Customer/FirstName.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Domain/Customer/HouseNumber.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Domain/Customer/HouseNumber.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Domain/Customer/LastName.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Domain/Customer/LastName.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Domain/Customer/Salutation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Domain/Customer/Salutation.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Domain/Station/Station.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Domain/Station/Station.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Domain/Station/StationAddress.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Domain/Station/StationAddress.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Domain/Station/StationIdentifier.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Domain/Station/StationIdentifier.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Domain/Station/StationName.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Domain/Station/StationName.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Domain/Vehicle/FuelType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Domain/Vehicle/FuelType.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Domain/Vehicle/TransmissionType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Domain/Vehicle/TransmissionType.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Domain/Vehicle/VehicleCategory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Domain/Vehicle/VehicleCategory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Domain/Vehicle/VehicleIdentifier.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Domain/Vehicle/VehicleIdentifier.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Domain/Vehicle/VehicleName.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Domain/Vehicle/VehicleName.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Domain/Vehicle/VehicleStatus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Domain/Vehicle/VehicleStatus.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter.Client/Pages/Home.razor" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter.Client/Pages/Home.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter.Client/Pages/VehicleSearch.razor" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter.Client/Pages/VehicleSearch.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Infrastructure.Persistence/Bookings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Infrastructure.Persistence/Bookings.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Infrastructure.Persistence/Customers.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Infrastructure.Persistence/Customers.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Infrastructure.Persistence/Extensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Infrastructure.Persistence/Extensions.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Infrastructure.Persistence/RentalDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Infrastructure.Persistence/RentalDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Infrastructure.Persistence/Stations.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Infrastructure.Persistence/Stations.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Infrastructure.Persistence/Vehicles.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Infrastructure.Persistence/Vehicles.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Infrastructure.Persistence/YellowCarRental.Infrastructure.Persistence.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Infrastructure.Persistence/YellowCarRental.Infrastructure.Persistence.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Infrastructure.Persistence/Seed/BookingSeedData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Infrastructure.Persistence/Seed/BookingSeedData.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,6 +68,18 @@
     <setting file="mock:///Immediate Window" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock:///Immediate Window" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock:///Immediate Window" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Immediate Window" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Immediate Window" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Immediate Window" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Immediate Window" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Immediate Window" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Immediate Window" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Immediate Window" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Immediate Window" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Immediate Window" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Immediate Window" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Immediate Window" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Immediate Window" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b13cb16f7e5749269b6922dc6752bd1c291448/19/319ae2ce/SimplePrincipalKeyValueFactory`1.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ba03229b8197450d925e741b560ee852e8e920/20/12a1a415/Dictionary`2.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ba03229b8197450d925e741b560ee852e8e920/f2/612c41ee/IComparable.cs" root0="FORCE_HIGHLIGHTING" />
@@ -105,6 +87,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/13ee72f059e41d6ac1a43317d9efb7f35827e31e614cf323215ee4ae75653489/PropertyBase.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/14d0d0de22ddbd27c52ef5dede3271652a286199ce326f3c6c38e5cce5acfd/HostEnvironmentEnvExtensions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1b81cb3be224213a6a73519b6e340a628d9a1fb8629c351a186a26f6376669/List.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/222a71ccc852b64aae905239f51dffba4717f533e56dfee9f296528e3a6cb4f/RequestDelegateFactory.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/24dd1164ba47541cb1d3eb011e638e16953dbea3ae3f4dc208c3bbf3e96298a/ServiceCollectionServiceExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/2ae5a0322dbe6ebe61e4a9bd573e376bb7c713e068b330203771a988bdda6b/WebApplicationBuilder.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/2b3cf01714fd98ff7f12316ce766442f76ff6a46a8ffb780ec8550953d47b94c/ComponentBase.cs" root0="FORCE_HIGHLIGHTING" />
@@ -120,12 +103,15 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/73408c6af01641d57439b8114bedfbd4615e2b54d13e6b0154cbc5b74b193e/HttpClientBuilderExtensions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/746ad1f326d850c9bc87306b804f850f3935a568468a6cbeb52878fcdca3c3/DbConnectionOptions.Common.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/7aacf3348d1d6b1f3d97618ec43d94efe2a8e68d6e8a59390e64bc6d9a7e3e/InMemoryDatabaseCreator.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/7d8a4023abe12c5fcf9d2ea23fa89f7db779d043dcc5d5a1a253dc44998f8311/ExpressionExtensions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/81d688add276f69c8379b55d229acdbcc350efa22210c2753ce5f9eb6af0/HttpClientFactoryServiceCollectionExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/8789586b575d44528c2aa18853f6eb96f3e8f8d3f4fa7eb9d6a56b54b49d7/Task.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/8a7665f11f8f566fd943a8a9578dbd7f7c51e7f1d81f627050e9532d254a7a/ProblemDetailsServiceCollectionExtensions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9051ec6efec2d2c7375aa44586085c12dc1992df5fff38c3010c991712a2adf/WebAssemblyHost.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/98887d204f3ed1b0b1799380a6d0325a2529f4a15029f0c4b90804ed6482/InternalEntityTypeBuilder.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/a0b45f29f34f594814a7b1fbc25fe5ef3c18257956ed4f4fbfa68717db58/DbContext.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/a118166a18c632a78b418ed4aaf1e325010ae2eccba1e4f989924b87672ee/MudForm.razor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/a257f5c4c25afb17cb3d5b5c928ffa78c8d8dda9d8112626ee194bbe7b911a0/EndpointMiddleware.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/a3a2943740096e0fc472456147a4ca9c22db1be62257205bbba9f0e648c0/DatabaseFacade.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/ae45e988e16209db7e657a22bea2ddd11f26af27c18291c16a9b6a5e6c717a/ServiceDiscoveryServiceCollectionExtensions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/ae6a07614483d415aa4a6bc882f7ebe87d89d45f27d75fec19e636eabd31/InternalTypeBaseBuilder.cs" root0="FORCE_HIGHLIGHTING" />
@@ -148,11 +134,13 @@
     <setting file="file://$PROJECT_DIR$/src/YellowCarRental.Application.Contracts/Vehicle/SearchVehiclesQueryResult.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/YellowCarRental.Application.Contracts/Vehicle/ShowSimilarVehiclesCommand.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/YellowCarRental.Application/CommandHandlers/VehicleCommandHandlers.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://D:/yellow-car-rental/src/YellowCarRental.Domain/Booking/BookingCustomer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/YellowCarRental.Domain/Common/DateRange.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/YellowCarRental.Domain/Vehicle/Vehicle.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter.Client/Layout/ClientNavMenu.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter.Client/Pages/BookingForm.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter.Client/Pages/Home.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="mock://D:/yellow-car-rental/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter.Client/Pages/VehicleSearch.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter.Client/appsettings.Development.json" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter.Client/appsettings.json" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/YellowCarRental.Frontend.Public/YellowCarRental.Frontend.Public.Client/Layout/ClientNavMenu.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
@@ -164,8 +152,12 @@
     <setting file="file://$PROJECT_DIR$/src/YellowCarRental.Frontend.Shared.Components/Pages/Register.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/YellowCarRental.Frontend.Shared.Components/RentalPriceCalculator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/YellowCarRental.Frontend.Shared.Components/_Imports.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="mock://D:/yellow-car-rental/src/YellowCarRental.Infrastructure.Persistence/Bookings.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/yellow-car-rental/src/YellowCarRental.Infrastructure.Persistence/Extensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/YellowCarRental.Infrastructure.Persistence/PersistenceException.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/YellowCarRental.Infrastructure.Persistence/RentalDbContext.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://D:/yellow-car-rental/src/YellowCarRental.Infrastructure.Persistence/RentalDbContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/yellow-car-rental/src/YellowCarRental.Infrastructure.Persistence/RentalDbContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/YellowCarRental.Infrastructure.Persistence/Seed/BookingSeedData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/YellowCarRental.Infrastructure.Persistence/Seed/CustomerSeedData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/YellowCarRental.Infrastructure.Persistence/Vehicles.cs" root0="FORCE_HIGHLIGHTING" />
@@ -212,9 +204,15 @@
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "HotReloadSettingsPage",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "sqlite",
+      "sqlserver.localdb"
+    ]
   }
 }]]></component>
-  <component name="RunManager" selected=".NET Launch Settings Profile.YellowCarRental.Frontend.CallCenter: http">
+  <component name="RunManager" selected=".NET Launch Settings Profile.YellowCarRental.Api: http (1)">
     <configuration name="AppHost: http" type="AspireHostConfiguration" factoryName="Aspire Host" activateToolWindowBeforeRun="false">
       <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/src/AppHost/AppHost.csproj" />
       <option name="PROJECT_TFM" value="net9.0" />
@@ -516,7 +514,7 @@
       <workItem from="1758307354115" duration="26342000" />
       <workItem from="1758368014154" duration="3961000" />
       <workItem from="1758372039378" duration="3763000" />
-      <workItem from="1758372918240" duration="30353000" />
+      <workItem from="1758372918240" duration="50104000" />
     </task>
     <task id="LOCAL-00001" summary="inital solution with aspire apphost and centralized package versioning">
       <option name="closed" value="true" />
@@ -718,7 +716,15 @@
       <option name="project" value="LOCAL" />
       <updated>1758375611850</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="fixing ef problems">
+      <option name="closed" value="true" />
+      <created>1758334926296</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1758334926296</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -749,7 +755,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="inital solution with aspire apphost and centralized package versioning" />
     <MESSAGE value="setup first projects on solution" />
     <MESSAGE value="adding the frontends" />
     <MESSAGE value="starting with domain model" />
@@ -774,7 +779,8 @@
     <MESSAGE value="more changes" />
     <MESSAGE value="hopefully fix for avialbable problem" />
     <MESSAGE value="cleanup and fix compiler warnings" />
-    <option name="LAST_COMMIT_MESSAGE" value="cleanup and fix compiler warnings" />
+    <MESSAGE value="fixing ef problems" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing ef problems" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -975,33 +981,12 @@
           <option name="timeStamp" value="51" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter.Client/Pages/Home.razor</url>
-          <line>10</line>
-          <properties isMultiMethodBreakpoint="true">
-            <option name="multiMethodBreakpoint" value="true" />
-          </properties>
-          <option name="timeStamp" value="58" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/src/YellowCarRental.Frontend.Public/YellowCarRental.Frontend.Public.Client/Pages/Home.razor</url>
           <line>11</line>
           <properties isMultiMethodBreakpoint="true">
             <option name="multiMethodBreakpoint" value="true" />
           </properties>
           <option name="timeStamp" value="59" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/src/YellowCarRental.Application/CommandHandlers/MappingExtensions.cs</url>
-          <line>44</line>
-          <properties documentPath="D:\yellow-car-rental\src\YellowCarRental.Application\CommandHandlers\MappingExtensions.cs" containingFunctionPresentation="Method 'ToData'">
-            <startOffsets>
-              <option value="1628" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2769" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="64" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/src/YellowCarRental.Infrastructure.Persistence/Vehicles.cs</url>
@@ -1031,16 +1016,112 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/src/YellowCarRental.Domain/Booking/BookingCustomer.cs</url>
-          <line>26</line>
+          <line>31</line>
           <properties documentPath="D:\yellow-car-rental\src\YellowCarRental.Domain\Booking\BookingCustomer.cs" containingFunctionPresentation="Method 'From'">
             <startOffsets>
-              <option value="643" />
+              <option value="878" />
             </startOffsets>
             <endOffsets>
-              <option value="815" />
+              <option value="1050" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="67" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/src/YellowCarRent.Frontend.ApiClient/VehicleApiClient.cs</url>
+          <line>17</line>
+          <properties documentPath="D:\yellow-car-rental\src\YellowCarRent.Frontend.ApiClient\VehicleApiClient.cs" containingFunctionPresentation="Method 'SearchVehiclesAsync'">
+            <startOffsets>
+              <option value="629" />
+            </startOffsets>
+            <endOffsets>
+              <option value="705" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="69" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/src/YellowCarRent.Frontend.ApiClient/StationApiClient.cs</url>
+          <line>12</line>
+          <properties documentPath="D:\yellow-car-rental\src\YellowCarRent.Frontend.ApiClient\StationApiClient.cs" containingFunctionPresentation="Method 'ListStationsAsync'">
+            <startOffsets>
+              <option value="464" />
+            </startOffsets>
+            <endOffsets>
+              <option value="490" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="70" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter.Client/Pages/VehicleSearch.razor</url>
+          <line>23</line>
+          <option name="timeStamp" value="71" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/src/YellowCarRental.Application/CommandHandlers/MappingExtensions.cs</url>
+          <line>86</line>
+          <properties documentPath="D:\yellow-car-rental\src\YellowCarRental.Application\CommandHandlers\MappingExtensions.cs" containingFunctionPresentation="Method 'ToData'">
+            <startOffsets>
+              <option value="3547" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3602" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="74" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/src/YellowCarRental.Infrastructure.Persistence/Bookings.cs</url>
+          <line>23</line>
+          <properties documentPath="D:\yellow-car-rental\src\YellowCarRental.Infrastructure.Persistence\Bookings.cs" containingFunctionPresentation="Method 'With'">
+            <startOffsets>
+              <option value="730" />
+            </startOffsets>
+            <endOffsets>
+              <option value="753" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="76" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/src/YellowCarRental.Infrastructure.Persistence/Bookings.cs</url>
+          <line>19</line>
+          <properties documentPath="D:\yellow-car-rental\src\YellowCarRental.Infrastructure.Persistence\Bookings.cs" containingFunctionPresentation="Method 'With'">
+            <startOffsets>
+              <option value="635" />
+            </startOffsets>
+            <endOffsets>
+              <option value="709" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="77" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/src/YellowCarRental.Infrastructure.Persistence/Vehicles.cs</url>
+          <line>78</line>
+          <properties documentPath="D:\yellow-car-rental\src\YellowCarRental.Infrastructure.Persistence\Vehicles.cs" containingFunctionPresentation="Method 'FindAll'">
+            <startOffsets>
+              <option value="2749" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2818" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="78" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/src/YellowCarRental.Infrastructure.Persistence/Seed/BookingSeedData.cs</url>
+          <line>78</line>
+          <properties documentPath="D:\yellow-car-rental\src\YellowCarRental.Infrastructure.Persistence\Seed\BookingSeedData.cs" containingFunctionPresentation="Method 'GetAll'">
+            <startOffsets>
+              <option value="3055" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3069" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="81" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

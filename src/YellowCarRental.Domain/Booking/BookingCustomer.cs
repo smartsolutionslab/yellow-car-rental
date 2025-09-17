@@ -8,9 +8,14 @@ public sealed record BookingCustomer(
     BirthDate BirthDate) : IValueObject
 {
     private BookingCustomer() // for EF
-        : this(null!, null!, null!)
-    {
-    }
+        : this(
+            new CustomerIdentifier(Guid.Empty),
+            new CustomerName(
+                new Salutation(string.Empty),
+                new FirstName(string.Empty),
+                new LastName(string.Empty)),
+            new BirthDate(DateOnly.MinValue))
+    {}
     
     public static BookingCustomer From(Customer customer)
     {

@@ -12,8 +12,9 @@ public static class Extensions
         where TBuilder : IHostApplicationBuilder
     {
         builder.Services.AddDbContext<RentalDbContext>(options =>
-            //options.UseSqlite($"yellow-car-rental-db"));
-            options.UseInMemoryDatabase("yellow-car-rentel-db"));
+            //options.UseSqlite($"Data Source=yellow-car-rental.db"));
+            options.UseInMemoryDatabase("yellow-car-rentel-db").EnableDetailedErrors().EnableSensitiveDataLogging());
+            
         
         builder.Services.AddScoped<ICustomers, Customers>();
         builder.Services.AddScoped<IVehicles, Vehicles>();
