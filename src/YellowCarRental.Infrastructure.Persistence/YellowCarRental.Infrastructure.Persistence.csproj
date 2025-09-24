@@ -11,10 +11,11 @@
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="Aspire.Oracle.EntityFrameworkCore" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" />
       <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" />
+      <PackageReference Include="Oracle.EntityFrameworkCore" />
     </ItemGroup>
 
 </Project>

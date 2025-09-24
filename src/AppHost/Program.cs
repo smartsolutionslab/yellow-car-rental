@@ -1,14 +1,15 @@
 using Aspire.Hosting;
 
 var builder = DistributedApplication.CreateBuilder(args);
-/*
 
-var dbPassword = builder.AddParameter("oracle-password");
+var dbPassword = builder.AddParameter("oracle-password", secret: true);
 
 var oracle = builder.AddOracle("oracle", dbPassword)
-    .WithDataVolume()
-    .AddDatabase("carrentaldb");
+    .WithLifetime(ContainerLifetime.Persistent)
+    .WithDataVolume();
 
+var oracleDb = oracle.AddDatabase("carrentaldb");
+/*
 // Keycloak
 var adminUsername = builder.AddParameter("username");
 var adminPassword = builder.AddParameter("password"); // TODO secret: true);
@@ -30,7 +31,9 @@ var keycloak = builder.AddKeycloak("keycloak", 8080, adminUsername, adminPasswor
 */
 
 var api = builder.AddProject<Projects.YellowCarRental_Api>("api")
-    .WithHttpHealthCheck("/health");
+        .WithReference(oracleDb)
+        .WaitFor(oracleDb)
+        .WithHttpHealthCheck("/health");
 
 var frontendPublic = builder.AddProject<Projects.YellowCarRental_Frontend_Public>("frontend-public")
     .WithExternalHttpEndpoints()

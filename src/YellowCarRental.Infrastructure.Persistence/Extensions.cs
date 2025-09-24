@@ -11,9 +11,12 @@ public static class Extensions
     public static TBuilder AddPersistence<TBuilder>(this TBuilder builder)
         where TBuilder : IHostApplicationBuilder
     {
-        builder.Services.AddDbContext<RentalDbContext>(options =>
+        builder.AddOracleDatabaseDbContext<RentalDbContext>(connectionName: "oracledb");
+        //builder.Services.AddDbContext<RentalDbContext>(options =>
+            //options.UseOracle(options => options.)
             //options.UseSqlite($"Data Source=yellow-car-rental.db"));
-            options.UseInMemoryDatabase("yellow-car-rentel-db").EnableDetailedErrors().EnableSensitiveDataLogging());
+            //options.UseInMemoryDatabase("yellow-car-rentel-db").EnableDetailedErrors().EnableSensitiveDataLogging());
+            
             
         
         builder.Services.AddScoped<ICustomers, Customers>();
