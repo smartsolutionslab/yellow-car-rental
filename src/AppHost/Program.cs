@@ -30,6 +30,7 @@ var keycloak = builder.AddKeycloak("keycloak", 8080, adminUsername, adminPasswor
 */
 
 var api = builder.AddProject<Projects.YellowCarRental_Api>("api")
+    .WithExternalHttpEndpoints()
     .WithHttpHealthCheck("/health");
 
 var frontendPublic = builder.AddProject<Projects.YellowCarRental_Frontend_Public>("frontend-public")
@@ -37,7 +38,7 @@ var frontendPublic = builder.AddProject<Projects.YellowCarRental_Frontend_Public
     .WithHttpHealthCheck("/health")
     .WithReference(api)
     .WaitFor(api);
-    //.WithEnvironment("ApiBaseUrl", api.GetEndpoint("http").Url)
+    //.WithEnvironment("ApiBaseUrl", api.GetEndpoint("http").Url);
 
 
 var frontendCallCenter = builder.AddProject<Projects.YellowCarRental_Frontend_CallCenter>("frontend-call-center")
@@ -45,7 +46,7 @@ var frontendCallCenter = builder.AddProject<Projects.YellowCarRental_Frontend_Ca
     .WithHttpHealthCheck("/health")
     .WithReference(api)
     .WaitFor(api);
-//.WithEnvironment("ApiBaseUrl", api.GetEndpoint("http").Url)
+    //.WithEnvironment("ApiBaseUrl", api.GetEndpoint("http").Url);
     
 
 builder.Build().Run();

@@ -8,7 +8,7 @@ public static class Extensions
     public static IServiceCollection AddApiClient(this IServiceCollection services, IConfiguration? configuration)
     {
         //var baseAddress = new Uri(configuration?["ApiBaseUrl"] ?? "https+http://api");
-        var baseAddress = new Uri("http://localhost:5185"); // Workaround for dev
+        var baseAddress = new Uri("https://localhost:7207"); // Workaround for dev
 
         services.AddHttpClient<VehicleApiClient>(client =>
         {

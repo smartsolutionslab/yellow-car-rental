@@ -55,13 +55,17 @@
                 {
                     <MudChip T="String" Color="Color.Success">Aktiv</MudChip>
                 }
-                @if (context.Status == "Completed")
+                else if (context.Status == "Cancelled")
                 {
-                    <MudChip T="String" Color="Color.Warning">Abgeschlossen</MudChip>
+                    <MudChip T="String" Color="Color.Warning">Storniert</MudChip>
+                }
+                else if (context.Status == "InProgress")
+                {
+                    <MudChip T="String" Color="Color.Primary">In Bearbeitung</MudChip>
                 }
                 else
                 {
-                    <MudChip T="String" Color="Color.Error">Storniert</MudChip>
+                    <MudChip T="String" Color="Color.Info">Abgeschlossen</MudChip>
                 }
                 </MudTd>
             <MudTd DataLabel="Preis">@($"{context.TotalPrice:C}")</MudTd>

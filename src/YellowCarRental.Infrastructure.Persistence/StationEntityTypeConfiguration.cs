@@ -35,17 +35,18 @@ public class StationEntityTypeConfiguration : IEntityTypeConfiguration<Station>
         builder.Ignore("_vehicleAssignments");
         /*e.OwnsMany<Station.VehicleAssignment>("_vehicleAssignments", a =>
         {
-            a.WithOwner().HasForeignKey(a => a.StationId).HasPrincipalKey(a => a.Id);
-            a.HasKey("_id");
-            a.Property<Guid>("_id")
-                .IsRequired();
+            a.WithOwner().HasForeignKey("StationId");
+            a.Property<Guid>("Id");
+            a.HasKey("Id");
             a.Property(a => a.StationId)
                 .IsRequired()
-                .HasConversion(id => id.Value, id => StationIdentifier.Of(id));
+                .HasConversion(id => id.Value, id => StationIdentifier.Of(id)); 
             a.Property(a => a.VehicleId)
+                .IsRequired()
                 .HasConversion(id => id.Value, id => VehicleIdentifier.Of(id));
-            a.HasOne(a => a.VehicleId);
+            });
+        
+  */      
 
-        });*/
     }
 }

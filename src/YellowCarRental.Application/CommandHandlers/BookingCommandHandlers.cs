@@ -42,11 +42,7 @@ public class BookingCommandHandlers(IBookings bookings, IVehicles vehicles, ISta
 
         var returnStation = await stations.FindById(returnStationId)
                             ?? throw new ApplicationException("Return station not found");
-
-        if (!pickupStation.HasVehicleAvailable(vehicleId))
-        {
-            throw new ApplicationException("This Vehicle is not available at the selected pickup station");
-        }
+        
 
         if (period.Start >= period.End)
         {
