@@ -18,10 +18,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d7d35477-cc4c-4f20-a938-b67bba0197b5" name="Changes" comment="use oracle db (more or less)">
+    <list default="true" id="d7d35477-cc4c-4f20-a938-b67bba0197b5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.YellowCarRental/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.YellowCarRental/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Directory.Packages.props" beforeDir="false" afterPath="$PROJECT_DIR$/Directory.Packages.props" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AppHost/AppHost.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppHost/AppHost.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppHost/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppHost/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,44 +139,45 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;.NET Launch Settings Profile.YellowCarRental.Api: http (1).executor&quot;: &quot;Debug&quot;,
-    &quot;.NET Launch Settings Profile.YellowCarRental.Frontend.CallCenter: http.executor&quot;: &quot;Run&quot;,
-    &quot;.NET Launch Settings Profile.YellowCarRental.Frontend.Public: http.executor&quot;: &quot;Run&quot;,
-    &quot;.NET Project.YellowCarRental.Frontend.CallCenter.Client.executor&quot;: &quot;Run&quot;,
-    &quot;.NET Project.YellowCarRental.Frontend.Public.Client.executor&quot;: &quot;Run&quot;,
-    &quot;Aspire Host.AppHost.executor&quot;: &quot;Run&quot;,
-    &quot;Aspire Host.AppHost: http.executor&quot;: &quot;Run&quot;,
-    &quot;Aspire Host.AppHost: https.executor&quot;: &quot;Run&quot;,
-    &quot;Attach to Process.15380:YellowCarRental.Frontend.CallCenter.executor&quot;: &quot;Debug&quot;,
-    &quot;Attach to Process.19712:YellowCarRental.Api.executor&quot;: &quot;Debug&quot;,
-    &quot;Attach to Process.23276:YellowCarRental.Api.executor&quot;: &quot;Debug&quot;,
-    &quot;Attach to Process.3296:YellowCarRental.Frontend.CallCenter.executor&quot;: &quot;Debug&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    ".NET Launch Settings Profile.YellowCarRental.Api: http (1).executor": "Debug",
+    ".NET Launch Settings Profile.YellowCarRental.Frontend.CallCenter: http.executor": "Run",
+    ".NET Launch Settings Profile.YellowCarRental.Frontend.Public: http.executor": "Run",
+    ".NET Project.YellowCarRental.Frontend.CallCenter.Client.executor": "Run",
+    ".NET Project.YellowCarRental.Frontend.Public.Client.executor": "Run",
+    "Aspire Host.AppHost.executor": "Run",
+    "Aspire Host.AppHost: http.executor": "Run",
+    "Aspire Host.AppHost: https.executor": "Run",
+    "Attach to Process.15380:YellowCarRental.Frontend.CallCenter.executor": "Debug",
+    "Attach to Process.19712:YellowCarRental.Api.executor": "Debug",
+    "Attach to Process.23276:YellowCarRental.Api.executor": "Debug",
+    "Attach to Process.3296:YellowCarRental.Frontend.CallCenter.executor": "Debug",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "XThreadsFramesViewSplitterKey": "0.6666667",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;sqlite&quot;,
-      &quot;sqlserver.localdb&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "sqlite",
+      "sqlserver.localdb"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Aspire Host.AppHost">
     <configuration name="AppHost" type="AspireHostConfiguration" factoryName="Aspire Host" activateToolWindowBeforeRun="false" temporary="true">
       <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/src/AppHost/AppHost.csproj" />
@@ -669,7 +671,15 @@
       <option name="project" value="LOCAL" />
       <updated>1758334926296</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="upgrade to aspire 9.5">
+      <option name="closed" value="true" />
+      <created>1759349288362</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1759349288362</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -700,7 +710,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="adding the frontends" />
     <MESSAGE value="starting with domain model" />
     <MESSAGE value="Frontends with MudBlazor now" />
     <MESSAGE value="add mudblazor and theme; reusable MainLayout" />
@@ -725,7 +734,8 @@
     <MESSAGE value="cleanup and fix compiler warnings" />
     <MESSAGE value="fixing ef problems" />
     <MESSAGE value="fix url problems" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix url problems" />
+    <MESSAGE value="upgrade to aspire 9.5" />
+    <option name="LAST_COMMIT_MESSAGE" value="upgrade to aspire 9.5" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -770,7 +780,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/src/AppHost/Program.cs</url>
-          <line>15</line>
+          <line>19</line>
           <properties documentPath="D:\yellow-car-rental\src\AppHost\Program.cs" containingFunctionPresentation="" />
           <option name="timeStamp" value="30" />
         </line-breakpoint>
@@ -827,12 +837,6 @@
             <option name="multiMethodBreakpoint" value="true" />
           </properties>
           <option name="timeStamp" value="49" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/src/YellowCarRental.Infrastructure.Persistence/Vehicles.cs</url>
-          <line>46</line>
-          <properties documentPath="D:\yellow-car-rental\src\YellowCarRental.Infrastructure.Persistence\Vehicles.cs" containingFunctionPresentation="Method 'WhichAreAvailable'" />
-          <option name="timeStamp" value="65" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/src/YellowCarRental.Domain/Booking/BookingCustomer.cs</url>
@@ -929,19 +933,6 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="96" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/src/YellowCarRental.Domain/Station/Station.cs</url>
-          <line>53</line>
-          <properties documentPath="C:\Users\heiko\RiderProjects\yellow-car-rental\src\YellowCarRental.Domain\Station\Station.cs" containingFunctionPresentation="Method 'AssignVehicle'">
-            <startOffsets>
-              <option value="1631" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1694" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="97" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/src/YellowCarRental.Application/CommandHandlers/BookingCommandHandlers.cs</url>

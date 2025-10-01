@@ -1,6 +1,10 @@
 using Aspire.Hosting;
 
 var builder = DistributedApplication.CreateBuilder(args);
+
+// Enables Docker publisher
+builder.AddDockerComposeEnvironment("yellow-car-rental-aspire-docker");
+
 /*
 
 var dbPassword = builder.AddParameter("oracle-password");
