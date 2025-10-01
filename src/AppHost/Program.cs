@@ -10,8 +10,8 @@ builder.AddDockerComposeEnvironment("yellow-car-rental-aspire-docker");
 var dbPassword = builder.AddParameter("oracle-password", secret: true);
 
 var oracle = builder.AddOracle("oracle", dbPassword)
-    .WithLifetime(ContainerLifetime.Persistent)
-    .WithDataVolume();
+    .WithLifetime(ContainerLifetime.Persistent);
+    //.WithDataVolume();
 
 var oracleDb = oracle.AddDatabase("carrentaldb");
 /*
