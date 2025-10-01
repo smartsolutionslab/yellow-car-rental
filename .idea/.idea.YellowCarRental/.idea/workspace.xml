@@ -5,7 +5,8 @@
     <projectFile profileName="https">YellowCarRental.Api/YellowCarRental.Api.csproj</projectFile>
     <projectFile aspireProfileName="http">src/AppHost/AppHost.csproj</projectFile>
     <projectFile aspireProfileName="https">src/AppHost/AppHost.csproj</projectFile>
-    <projectFile>src/YellowCarRental.Api/YellowCarRental.Api.csproj</projectFile>
+    <projectFile profileName="http">src/YellowCarRental.Api/YellowCarRental.Api.csproj</projectFile>
+    <projectFile profileName="https">src/YellowCarRental.Api/YellowCarRental.Api.csproj</projectFile>
     <projectFile>src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter.Client/YellowCarRental.Frontend.CallCenter.Client.csproj</projectFile>
     <projectFile profileName="http">src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter.csproj</projectFile>
     <projectFile profileName="https">src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter.csproj</projectFile>
@@ -17,18 +18,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d7d35477-cc4c-4f20-a938-b67bba0197b5" name="Changes" comment="fix url problems">
+    <list default="true" id="d7d35477-cc4c-4f20-a938-b67bba0197b5" name="Changes" comment="use oracle db (more or less)">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.YellowCarRental/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.YellowCarRental/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppHost/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppHost/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRent.Frontend.ApiClient/Extensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRent.Frontend.ApiClient/Extensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Api/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Api/appsettings.Development.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Application/CommandHandlers/BookingCommandHandlers.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Application/CommandHandlers/BookingCommandHandlers.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter.Client/Pages/Bookings.razor" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter.Client/Pages/Bookings.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter.Client/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter.Client/appsettings.Development.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Frontend.CallCenter/YellowCarRental.Frontend.CallCenter/appsettings.Development.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Frontend.Public/YellowCarRental.Frontend.Public/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Frontend.Public/YellowCarRental.Frontend.Public/appsettings.Development.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.Infrastructure.Persistence/StationEntityTypeConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.Infrastructure.Persistence/StationEntityTypeConfiguration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YellowCarRental.ServiceDefaults/Extensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/YellowCarRental.ServiceDefaults/Extensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Directory.Packages.props" beforeDir="false" afterPath="$PROJECT_DIR$/Directory.Packages.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppHost/AppHost.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppHost/AppHost.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +39,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="add-oracle-db" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -140,44 +138,44 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Launch Settings Profile.YellowCarRental.Api: http (1).executor": "Debug",
-    ".NET Launch Settings Profile.YellowCarRental.Frontend.CallCenter: http.executor": "Run",
-    ".NET Launch Settings Profile.YellowCarRental.Frontend.Public: http.executor": "Run",
-    ".NET Project.YellowCarRental.Frontend.CallCenter.Client.executor": "Run",
-    ".NET Project.YellowCarRental.Frontend.Public.Client.executor": "Run",
-    "Aspire Host.AppHost.executor": "Run",
-    "Aspire Host.AppHost: http.executor": "Run",
-    "Aspire Host.AppHost: https.executor": "Run",
-    "Attach to Process.15380:YellowCarRental.Frontend.CallCenter.executor": "Debug",
-    "Attach to Process.19712:YellowCarRental.Api.executor": "Debug",
-    "Attach to Process.23276:YellowCarRental.Api.executor": "Debug",
-    "Attach to Process.3296:YellowCarRental.Frontend.CallCenter.executor": "Debug",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.keymap",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Launch Settings Profile.YellowCarRental.Api: http (1).executor&quot;: &quot;Debug&quot;,
+    &quot;.NET Launch Settings Profile.YellowCarRental.Frontend.CallCenter: http.executor&quot;: &quot;Run&quot;,
+    &quot;.NET Launch Settings Profile.YellowCarRental.Frontend.Public: http.executor&quot;: &quot;Run&quot;,
+    &quot;.NET Project.YellowCarRental.Frontend.CallCenter.Client.executor&quot;: &quot;Run&quot;,
+    &quot;.NET Project.YellowCarRental.Frontend.Public.Client.executor&quot;: &quot;Run&quot;,
+    &quot;Aspire Host.AppHost.executor&quot;: &quot;Run&quot;,
+    &quot;Aspire Host.AppHost: http.executor&quot;: &quot;Run&quot;,
+    &quot;Aspire Host.AppHost: https.executor&quot;: &quot;Run&quot;,
+    &quot;Attach to Process.15380:YellowCarRental.Frontend.CallCenter.executor&quot;: &quot;Debug&quot;,
+    &quot;Attach to Process.19712:YellowCarRental.Api.executor&quot;: &quot;Debug&quot;,
+    &quot;Attach to Process.23276:YellowCarRental.Api.executor&quot;: &quot;Debug&quot;,
+    &quot;Attach to Process.3296:YellowCarRental.Frontend.CallCenter.executor&quot;: &quot;Debug&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "sqlite",
-      "sqlserver.localdb"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;sqlite&quot;,
+      &quot;sqlserver.localdb&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Aspire Host.AppHost">
     <configuration name="AppHost" type="AspireHostConfiguration" factoryName="Aspire Host" activateToolWindowBeforeRun="false" temporary="true">
       <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/src/AppHost/AppHost.csproj" />
@@ -755,40 +753,19 @@
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/src/YellowCarRent.Frontend.ApiClient/BookingApiClient.cs</url>
           <line>56</line>
-          <properties documentPath="D:\yellow-car-rental\src\YellowCarRent.Frontend.ApiClient\BookingApiClient.cs" containingFunctionPresentation="Method 'GetBookingsForCustomerAsync'">
-            <startOffsets>
-              <option value="2636" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2812" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="D:\yellow-car-rental\src\YellowCarRent.Frontend.ApiClient\BookingApiClient.cs" containingFunctionPresentation="Method 'GetBookingsForCustomerAsync'" />
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/src/YellowCarRent.Frontend.ApiClient/BookingApiClient.cs</url>
           <line>16</line>
-          <properties documentPath="D:\yellow-car-rental\src\YellowCarRent.Frontend.ApiClient\BookingApiClient.cs" containingFunctionPresentation="Method 'BookVehicle'">
-            <startOffsets>
-              <option value="815" />
-            </startOffsets>
-            <endOffsets>
-              <option value="909" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="D:\yellow-car-rental\src\YellowCarRent.Frontend.ApiClient\BookingApiClient.cs" containingFunctionPresentation="Method 'BookVehicle'" />
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/src/YellowCarRental.Application/CommandHandlers/VehicleCommandHandlers.cs</url>
           <line>13</line>
-          <properties documentPath="D:\yellow-car-rental\src\YellowCarRental.Application\VehicleCommandHandlers.cs" containingFunctionPresentation="Method 'HandleQueryAsync'">
-            <startOffsets>
-              <option value="662" />
-            </startOffsets>
-            <endOffsets>
-              <option value="711" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="D:\yellow-car-rental\src\YellowCarRental.Application\VehicleCommandHandlers.cs" containingFunctionPresentation="Method 'HandleQueryAsync'" />
           <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
@@ -800,27 +777,13 @@
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/src/YellowCarRent.Frontend.ApiClient/VehicleApiClient.cs</url>
           <line>53</line>
-          <properties documentPath="D:\yellow-car-rental\src\YellowCarRent.Frontend.ApiClient\VehicleApiClient.cs" containingFunctionPresentation="Method 'ShowSimilarVehiclesAsync'">
-            <startOffsets>
-              <option value="2062" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2161" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="D:\yellow-car-rental\src\YellowCarRent.Frontend.ApiClient\VehicleApiClient.cs" containingFunctionPresentation="Method 'ShowSimilarVehiclesAsync'" />
           <option name="timeStamp" value="33" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/src/YellowCarRent.Frontend.ApiClient/VehicleApiClient.cs</url>
           <line>25</line>
-          <properties documentPath="D:\yellow-car-rental\src\YellowCarRent.Frontend.ApiClient\VehicleApiClient.cs" containingFunctionPresentation="Method 'SearchVehiclesAsync'">
-            <startOffsets>
-              <option value="901" />
-            </startOffsets>
-            <endOffsets>
-              <option value="993" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="D:\yellow-car-rental\src\YellowCarRent.Frontend.ApiClient\VehicleApiClient.cs" containingFunctionPresentation="Method 'SearchVehiclesAsync'" />
           <option name="timeStamp" value="34" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
@@ -868,66 +831,31 @@
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/src/YellowCarRental.Infrastructure.Persistence/Vehicles.cs</url>
           <line>46</line>
-          <properties documentPath="D:\yellow-car-rental\src\YellowCarRental.Infrastructure.Persistence\Vehicles.cs" containingFunctionPresentation="Method 'WhichAreAvailable'">
-            <startOffsets>
-              <option value="1495" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1805" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="D:\yellow-car-rental\src\YellowCarRental.Infrastructure.Persistence\Vehicles.cs" containingFunctionPresentation="Method 'WhichAreAvailable'" />
           <option name="timeStamp" value="65" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/src/YellowCarRental.Domain/Booking/BookingCustomer.cs</url>
           <line>31</line>
-          <properties documentPath="D:\yellow-car-rental\src\YellowCarRental.Domain\Booking\BookingCustomer.cs" containingFunctionPresentation="Method 'From'">
-            <startOffsets>
-              <option value="878" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1050" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="D:\yellow-car-rental\src\YellowCarRental.Domain\Booking\BookingCustomer.cs" containingFunctionPresentation="Method 'From'" />
           <option name="timeStamp" value="67" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/src/YellowCarRent.Frontend.ApiClient/VehicleApiClient.cs</url>
           <line>17</line>
-          <properties documentPath="D:\yellow-car-rental\src\YellowCarRent.Frontend.ApiClient\VehicleApiClient.cs" containingFunctionPresentation="Method 'SearchVehiclesAsync'">
-            <startOffsets>
-              <option value="629" />
-            </startOffsets>
-            <endOffsets>
-              <option value="705" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="D:\yellow-car-rental\src\YellowCarRent.Frontend.ApiClient\VehicleApiClient.cs" containingFunctionPresentation="Method 'SearchVehiclesAsync'" />
           <option name="timeStamp" value="69" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/src/YellowCarRental.Infrastructure.Persistence/Bookings.cs</url>
           <line>23</line>
-          <properties documentPath="D:\yellow-car-rental\src\YellowCarRental.Infrastructure.Persistence\Bookings.cs" containingFunctionPresentation="Method 'With'">
-            <startOffsets>
-              <option value="730" />
-            </startOffsets>
-            <endOffsets>
-              <option value="753" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="D:\yellow-car-rental\src\YellowCarRental.Infrastructure.Persistence\Bookings.cs" containingFunctionPresentation="Method 'With'" />
           <option name="timeStamp" value="76" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/src/YellowCarRental.Infrastructure.Persistence/Bookings.cs</url>
           <line>19</line>
-          <properties documentPath="D:\yellow-car-rental\src\YellowCarRental.Infrastructure.Persistence\Bookings.cs" containingFunctionPresentation="Method 'With'">
-            <startOffsets>
-              <option value="635" />
-            </startOffsets>
-            <endOffsets>
-              <option value="709" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="D:\yellow-car-rental\src\YellowCarRental.Infrastructure.Persistence\Bookings.cs" containingFunctionPresentation="Method 'With'" />
           <option name="timeStamp" value="77" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
@@ -939,14 +867,7 @@
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/src/YellowCarRental.Infrastructure.Persistence/Seed/BookingSeedData.cs</url>
           <line>78</line>
-          <properties documentPath="D:\yellow-car-rental\src\YellowCarRental.Infrastructure.Persistence\Seed\BookingSeedData.cs" containingFunctionPresentation="Method 'GetAll'">
-            <startOffsets>
-              <option value="3055" />
-            </startOffsets>
-            <endOffsets>
-              <option value="3069" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="D:\yellow-car-rental\src\YellowCarRental.Infrastructure.Persistence\Seed\BookingSeedData.cs" containingFunctionPresentation="Method 'GetAll'" />
           <option name="timeStamp" value="81" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
